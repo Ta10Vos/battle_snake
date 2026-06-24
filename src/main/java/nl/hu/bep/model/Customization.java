@@ -1,9 +1,9 @@
 package nl.hu.bep.model;
 
 public class Customization {
-    String color;
-    String head;
-    String tail;
+    private String color;
+    private String head;
+    private String tail;
 
     public Customization() {
         color = "#00ffff";

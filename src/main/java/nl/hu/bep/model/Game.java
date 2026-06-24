@@ -1,9 +1,9 @@
 package nl.hu.bep.model;
 
 public class Game {
-    String id;
-    Ruleset ruleset;
-    String map;
-    int timeout;
-    String source;
+    private String id;
+    private Ruleset ruleset;
+    private String map;
+    private int timeout;
+    private String source;
 }

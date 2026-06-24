@@ -1,6 +1,6 @@
 package nl.hu.bep.model;
 
 public class Coordinate {
-    String x;
-    String y;
+    public String x;
+    public String y;
 }

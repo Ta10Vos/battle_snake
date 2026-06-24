@@ -3,14 +3,14 @@ package nl.hu.bep.model;
 import java.util.ArrayList;
 
 public class Battlesnake {
-    String id;
-    String name;
-    int health;
-    ArrayList<Coordinate> body;
-    String latency;
-    Coordinate head;
-    int length;
-    String shout;// Previous turn shout
-    String squad;
-    Customization customizations;
+    private String id;
+    private String name;
+    private int health;
+    private ArrayList<Coordinate> body;
+    private String latency;
+    private Coordinate head;
+    private int length;
+    private String shout;// Previous turn shout
+    private String squad;
+    private Customization customizations;
 }

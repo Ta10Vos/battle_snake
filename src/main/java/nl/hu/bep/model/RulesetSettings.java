@@ -1,7 +1,7 @@
 package nl.hu.bep.model;
 
 public class RulesetSettings {
-    int foodSpawnChance;
-    int minimumFood;
-    int hazardDamagePerTurn;
+    protected int foodSpawnChance;
+    protected int minimumFood;
+    protected int hazardDamagePerTurn;
 }
