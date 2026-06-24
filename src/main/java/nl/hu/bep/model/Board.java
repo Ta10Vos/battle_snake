@@ -8,4 +8,44 @@ public class Board {
     private ArrayList<Coordinate> food;
     private ArrayList<Coordinate> hazards;
     private ArrayList<Battlesnake> snakes;
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public ArrayList<Coordinate> getFood() {
+        return food;
+    }
+
+    public void setFood(ArrayList<Coordinate> food) {
+        this.food = food;
+    }
+
+    public ArrayList<Coordinate> getHazards() {
+        return hazards;
+    }
+
+    public void setHazards(ArrayList<Coordinate> hazards) {
+        this.hazards = hazards;
+    }
+
+    public ArrayList<Battlesnake> getSnakes() {
+        return snakes;
+    }
+
+    public void setSnakes(ArrayList<Battlesnake> snakes) {
+        this.snakes = snakes;
+    }
 }
