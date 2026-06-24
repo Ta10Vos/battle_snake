@@ -1,6 +1,6 @@
-package nl.hu.bep.model;
+package nl.hu.bep.model.responses;
 
-public class Customization {
+public class CustomizationResponse {
     String apiversion = "1";
     String author = "Ta10Vos";
     String color = "#00ffff";

@@ -1,6 +1,6 @@
 package nl.hu.bep.webservices;
 
-import nl.hu.bep.model.Customization;
+import nl.hu.bep.model.responses.CustomizationResponse;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -13,7 +13,7 @@ public class BaseResource {
     public Response getCustomization() {
         return Response
                 .status(Response.Status.OK)
-                .entity(new Customization())
+                .entity(new CustomizationResponse())
                 .build();
     }
 }
