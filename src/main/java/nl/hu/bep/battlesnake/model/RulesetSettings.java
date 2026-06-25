@@ -1,4 +1,4 @@
-package nl.hu.bep.model;
+package nl.hu.bep.battlesnake.model;
 
 public class RulesetSettings {
     protected int foodSpawnChance;

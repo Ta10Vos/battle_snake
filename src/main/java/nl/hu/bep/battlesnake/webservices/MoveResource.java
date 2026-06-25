@@ -1,9 +1,10 @@
-package nl.hu.bep.webservices;
+package nl.hu.bep.battlesnake.webservices;
 
-import nl.hu.bep.model.requests.MoveRequest;
+import nl.hu.bep.battlesnake.model.requests.MoveRequest;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/move")
 public class MoveResource {

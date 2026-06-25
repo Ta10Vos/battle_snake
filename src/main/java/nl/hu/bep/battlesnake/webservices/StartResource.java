@@ -1,10 +1,10 @@
-package nl.hu.bep.webservices;
+package nl.hu.bep.battlesnake.webservices;
 
-import nl.hu.bep.model.requests.EndRequest;
-import nl.hu.bep.model.requests.StartRequest;
+import nl.hu.bep.battlesnake.model.requests.StartRequest;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/start")
 public class StartResource {

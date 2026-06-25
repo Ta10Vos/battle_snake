@@ -1,4 +1,4 @@
-package nl.hu.bep.model.responses;
+package nl.hu.bep.battlesnake.model.responses;
 
 public class MoveResponse {
     public String move;// "up" || "down" || "left" || "right"

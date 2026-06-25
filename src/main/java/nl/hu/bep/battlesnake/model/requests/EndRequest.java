@@ -1,4 +1,4 @@
-package nl.hu.bep.model.requests;
+package nl.hu.bep.battlesnake.model.requests;
 
 public class EndRequest extends BaseGameRequest {
 

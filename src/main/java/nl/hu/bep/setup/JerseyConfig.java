@@ -5,13 +5,14 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 import javax.ws.rs.ApplicationPath;
 
-@ApplicationPath("restservices")
+@ApplicationPath("/")
 public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
-
+        packages("nl.hu.bep.battlesnake.webservices");
         register(RolesAllowedDynamicFeature.class);
 
-        // Geef aan in welke package je jouw webservices gaat programmeren, bijv.:
-        // packages("nl.hu.bep.jouwapplicatie.webservices");
+        System.out.println("JERSEY CONFIG LOADED");
+        System.out.println("JERSEY RESOURCES:");
+        getClasses().forEach(System.out::println);
     }
 }
