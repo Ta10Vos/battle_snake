@@ -6,7 +6,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/")
+@Path("/game")
 public class BaseResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)

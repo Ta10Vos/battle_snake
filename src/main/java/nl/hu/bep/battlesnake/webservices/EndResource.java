@@ -6,7 +6,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/end")
+@Path("/game/end")
 public class EndResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

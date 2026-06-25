@@ -6,7 +6,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/move")
+@Path("/game/move")
 public class MoveResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

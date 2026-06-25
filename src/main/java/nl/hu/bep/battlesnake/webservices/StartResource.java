@@ -6,7 +6,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/start")
+@Path("/game/start")
 public class StartResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
