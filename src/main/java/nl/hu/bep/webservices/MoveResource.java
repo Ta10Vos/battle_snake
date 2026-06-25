@@ -11,6 +11,6 @@ public class MoveResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response move(MoveRequest request) {
-
+        return Response.ok().build();
     }
 }
