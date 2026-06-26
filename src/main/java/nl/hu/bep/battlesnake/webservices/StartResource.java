@@ -11,7 +11,7 @@ public class StartResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response endGame(StartRequest request) {
+    public Response startGame(StartRequest request) {
         return Response.ok().build();
     }
 }
