@@ -9,6 +9,16 @@ public class Board {
     private ArrayList<Coordinate> hazards;
     private ArrayList<Battlesnake> snakes;
 
+    public Board() {}
+
+    public Board(ArrayList<Coordinate> food, int height, int width, ArrayList<Coordinate> hazards, ArrayList<Battlesnake> snakes) {
+        this.food = food;
+        this.height = height;
+        this.width = width;
+        this.hazards = hazards;
+        this.snakes = snakes;
+    }
+
     public int getHeight() {
         return height;
     }

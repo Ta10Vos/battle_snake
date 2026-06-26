@@ -5,6 +5,14 @@ public class Ruleset {
     private String version;
     private Object settings;
 
+    public Ruleset() {}
+
+    public Ruleset(String name, String version, Object settings) {
+        this.name = name;
+        this.version = version;
+        this.settings = settings;
+    }
+
     public String getName() {
         return name;
     }

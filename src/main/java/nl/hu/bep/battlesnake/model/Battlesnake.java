@@ -14,6 +14,21 @@ public class Battlesnake {
     private String squad;
     private Customization customizations;
 
+    public Battlesnake() {}
+
+    public Battlesnake(ArrayList<Coordinate> body, String id, String name, int health, String latency, Coordinate head, int length, String shout, String squad, Customization customizations) {
+        this.body = body;
+        this.setId(id);
+        this.name = name;
+        this.health = health;
+        this.latency = latency;
+        this.head = head;
+        this.length = length;
+        this.shout = shout;
+        this.squad = squad;
+        this.customizations = customizations;
+    }
+
     public String getSquad() {
         return squad;
     }

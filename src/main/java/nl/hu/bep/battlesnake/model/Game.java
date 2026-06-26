@@ -7,11 +7,25 @@ public class Game {
     private int timeout;
     private String source;
 
+    public Game() {}
+
+    public Game(String id, Ruleset ruleset, String map, int timeout, String source) {
+        this.id = id;
+        this.ruleset = ruleset;
+        this.map = map;
+        this.timeout = timeout;
+        this.source = source;
+    }
+
     public String getId() {
         return id;
     }
 
+    /**
+     * Set the id for the current game. Can only be set once.
+     */
     public void setId(String id) {
+        if (!this.id.isBlank()) return;
         this.id = id;
     }
 

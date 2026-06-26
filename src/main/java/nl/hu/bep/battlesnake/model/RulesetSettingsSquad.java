@@ -6,6 +6,15 @@ public class RulesetSettingsSquad {
     protected boolean sharedHealth;
     protected boolean sharedLength;
 
+    public RulesetSettingsSquad() {}
+
+    public RulesetSettingsSquad(boolean allowBodyCollisions, boolean sharedElimination, boolean sharedHealth, boolean sharedLength) {
+        this.allowBodyCollisions = allowBodyCollisions;
+        this.sharedElimination = sharedElimination;
+        this.sharedHealth = sharedHealth;
+        this.sharedLength = sharedLength;
+    }
+
     public boolean isAllowBodyCollisions() {
         return allowBodyCollisions;
     }

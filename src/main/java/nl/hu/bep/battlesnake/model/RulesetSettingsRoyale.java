@@ -3,6 +3,12 @@ package nl.hu.bep.battlesnake.model;
 public class RulesetSettingsRoyale {
     protected int shrinkEveryNTurns;
 
+    public RulesetSettingsRoyale() {}
+
+    public RulesetSettingsRoyale(int shrinkEveryNTurns) {
+        this.shrinkEveryNTurns = shrinkEveryNTurns;
+    }
+
     public int getShrinkEveryNTurns() {
         return shrinkEveryNTurns;
     }
