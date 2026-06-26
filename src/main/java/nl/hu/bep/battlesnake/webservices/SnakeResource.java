@@ -13,9 +13,7 @@ import java.util.Map;
 @Path("snake/")
 public class SnakeResource {
     @GET
-    @Path("/game")
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response getCustomization() {
         Customization customization = PersistenceManager.getCustomization();
         return Response
