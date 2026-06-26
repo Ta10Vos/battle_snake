@@ -2,6 +2,7 @@ package nl.hu.bep.battlesnake.enums;
 
 public enum TileType {
     // Map Tiles
+    NONE,// Default value
     EMPTY,
     WALL,
     FOOD,
