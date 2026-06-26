@@ -6,15 +6,18 @@ export default class ApiFramework {
     }
 
     async getRequest(endpoint, params = {}) {
-        const response = await fetch(this.apiRoute + endpoint, {
+        const options = {
             method: "GET",
             headers: {"content-type": "application/json"},
             ...params
-        });
+        };
+        const response = await fetch(this.apiRoute + endpoint, options);
 
         if (!response.status.toString().startsWith("4") && !response.status.toString().startsWith("5")) {
-            const returnedData = await response.json();
-            return returnedData;
+            if (!response) {
+                return true;
+            }
+            return await response.json();
         } else {
             const message = response.message ?? "Something went wrong";
             alert("Error: " + message);
@@ -23,18 +26,22 @@ export default class ApiFramework {
     }
 
     async putRequest(endpoint, params) {
-        const response = await fetch(this.apiRoute + endpoint, {
+        const options = {
             method: "PUT",
             headers: {"content-type": "application/json"},
             ...params
-        });
-
-        const returnedData = await response.json();
+        };
+        const response = await fetch(this.apiRoute + endpoint, options);
 
         if (!response.status.toString().startsWith("4") && !response.status.toString().startsWith("5")) {
-            return returnedData;
+            if (!response) {
+                return true;
+            } else {
+                return await response.json();
+            }
         } else {
-            alert("Error: " + response.message ?? "Something went wrong.");
+            const message = response.message ?? "Something went wrong";
+            alert("Error: " + message);
             return false;
         }
     }

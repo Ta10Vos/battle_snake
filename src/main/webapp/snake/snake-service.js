@@ -17,6 +17,6 @@ export default class SnakeService {
     }
 
     async updateSnake(updatedSnake) {
-        return await this.apiFramework.putRequest("snake/", {"body": updatedSnake});
+        return await this.apiFramework.putRequest("snake/", {"body": JSON.stringify(updatedSnake)});
     }
 }
