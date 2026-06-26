@@ -4,7 +4,7 @@ import nl.hu.bep.battlesnake.model.Customization;
 
 public class PersistenceManager
 {
-    private static Customization customization;
+    private static Customization customization = new Customization();
     public final static String filesDirectory = System.getProperty("user.dir") + "../files";
     public final static String snakesDirectory = filesDirectory + "/snakes";
 

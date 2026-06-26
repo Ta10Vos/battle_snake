@@ -1,6 +1,9 @@
 package nl.hu.bep.battlesnake.webservices;
 
+import nl.hu.bep.battlesnake.model.Customization;
 import nl.hu.bep.battlesnake.model.responses.BaseInformationResponse;
+import nl.hu.bep.battlesnake.model.responses.CustomizationResponse;
+import nl.hu.bep.battlesnake.util.PersistenceManager;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -21,9 +24,19 @@ public class BaseResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getCustomization() {
+        Customization customization = PersistenceManager.getCustomization();
+        BaseInformationResponse baseInformationResponse = new BaseInformationResponse();
+
+        baseInformationResponse.apiversion = "1";
+        baseInformationResponse.author = "Ta10Vos";
+        baseInformationResponse.version = "0.1.1-alpha";
+        baseInformationResponse.color = customization.getColor();
+        baseInformationResponse.head = customization.getHead();
+        baseInformationResponse.tail = customization.getTail();
+
         return Response
                 .status(Response.Status.OK)
-                .entity(new BaseInformationResponse())
+                .entity(baseInformationResponse)
                 .build();
     }
 }
