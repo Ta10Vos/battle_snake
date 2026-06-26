@@ -1,6 +1,11 @@
 package nl.hu.bep.battlesnake.model;
 
 public class Coordinate {
-    public String x;
-    public String y;
+    public int x;
+    public int y;
+
+    public Coordinate(int x, int y) {
+        this.x =  x;
+        this.y = y;
+    }
 }
