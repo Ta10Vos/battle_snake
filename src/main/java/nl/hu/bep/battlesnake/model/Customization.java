@@ -1,5 +1,7 @@
 package nl.hu.bep.battlesnake.model;
 
+import nl.hu.bep.battlesnake.model.requests.CustomizationRequest;
+
 public class Customization {
     private String color;
     private String head;
@@ -9,6 +11,12 @@ public class Customization {
         color = "#00ffff";
         head = "default";
         tail = "default";
+    }
+
+    public Customization(CustomizationRequest request) {
+        color = request.color;
+        head = request.head;
+        tail = request.tail;
     }
 
     public String getColor() {

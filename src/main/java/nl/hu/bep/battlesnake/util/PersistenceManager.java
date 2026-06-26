@@ -7,7 +7,13 @@ public class PersistenceManager
     private static Customization customization;
     public final static String filesDirectory = System.getProperty("user.dir") + "../files";
     public final static String snakesDirectory = filesDirectory + "/snakes";
-    static boolean saveCustomization(String snakeId, Customization customization) {
+
+    /**
+     * Save customization
+     * @param customization the updated customization to save
+     * @return boolean indicating whether the customization has been successfully saved or not
+     */
+    public static boolean saveCustomization(Customization customization) {
         PersistenceManager.customization = customization;
         return true;
 //        // Persistence below
@@ -16,11 +22,10 @@ public class PersistenceManager
     }
 
     /**
-     * Try to find a customization based on the snakeId (fileName)
-     * @param snakeId id of the snake aka the name used to save/search it.
-     * @return null | String
+     * Get the customization
+     * @return Customization
      */
-    static Customization getCustomization(String snakeId) {
+    public static Customization getCustomization() {
         return PersistenceManager.customization;
 //        String customizationJson = FileManager.tryReadFile(filesDirectory, snakeId + ".txt");
 //        Customization customization = new Customization();
