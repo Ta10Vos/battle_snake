@@ -4,11 +4,15 @@ import nl.hu.bep.battlesnake.model.Customization;
 
 public class PersistenceManager
 {
+    private static Customization customization;
     public final static String filesDirectory = System.getProperty("user.dir") + "../files";
     public final static String snakesDirectory = filesDirectory + "/snakes";
     static boolean saveCustomization(String snakeId, Customization customization) {
-        String snakeJson = "";
-        return FileManager.tryWriteToFile(filesDirectory, snakeId + ".txt", snakeJson);
+        PersistenceManager.customization = customization;
+        return true;
+//        // Persistence below
+//        String snakeJson = "";
+//        return FileManager.tryWriteToFile(filesDirectory, snakeId + ".txt", snakeJson);
     }
 
     /**
@@ -17,8 +21,9 @@ public class PersistenceManager
      * @return null | String
      */
     static Customization getCustomization(String snakeId) {
-        String customizationJson = FileManager.tryReadFile(filesDirectory, snakeId + ".txt");
-        Customization customization = new Customization();
-        return customization;
+        return PersistenceManager.customization;
+//        String customizationJson = FileManager.tryReadFile(filesDirectory, snakeId + ".txt");
+//        Customization customization = new Customization();
+//        return customization;
     }
 }
