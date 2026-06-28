@@ -52,7 +52,7 @@ public class BoardTile {
                 }
             }
 
-            if (type != TileType.EMPTY && !force) {// Can only overwrite empty tiles
+            if (tileType != TileType.EMPTY && !force) {// Can only overwrite empty tiles
                 return;
             }
         }
