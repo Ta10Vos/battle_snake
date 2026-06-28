@@ -20,16 +20,22 @@ public class ShortestPath {
     public ShortestPath(BoardMap map) {
         this.map = map;
         this.costMap = map.toCostMap();
-        this.maxX = costMap.getFirst().size() - 1;
+        this.maxX = costMap.get(0).size() - 1;
         this.maxY = costMap.size() - 1;
     }
 
     public MoveResult run(Coordinate start, Coordinate end) {
-        Point startPoint = (Point) start;
-        Point endPoint = (Point) end;
+        Point startPoint = new Point(start);
+        Point endPoint = new Point(end);
 
         MoveResult result = findPath(startPoint, endPoint);
-        System.out.println();
+        System.out.println("SUCCESSFULLY CREATED A PATH:");
+        System.out.println("TOTAL COST:" + result.getPathCost());
+        System.out.println("PATH:\n---");
+        System.out.println(result.getPath().toString());
+        System.out.println("---\nEND OF LOG");
+
+        return result;
     }
 
     /**
@@ -41,7 +47,7 @@ public class ShortestPath {
      */
     public MoveResult findPath(Point start, Point end) {
         boolean finished = false;
-        List<Point> used =  new ArrayList<>();
+        List<Point> used = new ArrayList<>();
         used.add(start);
 
         while (!finished) {
@@ -71,10 +77,11 @@ public class ShortestPath {
         }
 
         MoveResult result = new MoveResult();
-        Point point = used.getLast();
+        Point point = used.get(used.size() - 1);
+        // Walk through the points that have each other saved.
         while (point.previous != null) {
-            int cost = costMap.get(point.y).get(point.x);
-            result.addToPath(point, cost);
+            point.setCost(costMap.get(point.y).get(point.x));
+            result.addToPath(point);
             point = point.previous;
         }
         return result;
