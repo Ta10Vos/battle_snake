@@ -1,61 +1,44 @@
 package nl.hu.bep.battlesnake.model;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.Collections.unmodifiableList;
 
 public class Board {
     private int height;
     private int width;
-    private ArrayList<Coordinate> food;
-    private ArrayList<Coordinate> hazards;
-    private ArrayList<Battlesnake> snakes;
+    private List<Coordinate> food;
+    private List<Coordinate> hazards;
+    private List<Battlesnake> snakes;
 
     public Board() {}
 
     public Board(ArrayList<Coordinate> food, int height, int width, ArrayList<Coordinate> hazards, ArrayList<Battlesnake> snakes) {
-        this.food = food;
+        this.food = unmodifiableList(food);
         this.height = height;
         this.width = width;
-        this.hazards = hazards;
-        this.snakes = snakes;
+        this.hazards = unmodifiableList(hazards);
+        this.snakes = unmodifiableList(snakes);
     }
 
     public int getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
     public int getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public ArrayList<Coordinate> getFood() {
+    public List<Coordinate> getFood() {
         return food;
     }
 
-    public void setFood(ArrayList<Coordinate> food) {
-        this.food = food;
-    }
-
-    public ArrayList<Coordinate> getHazards() {
+    public List<Coordinate> getHazards() {
         return hazards;
     }
 
-    public void setHazards(ArrayList<Coordinate> hazards) {
-        this.hazards = hazards;
-    }
-
-    public ArrayList<Battlesnake> getSnakes() {
+    public List<Battlesnake> getSnakes() {
         return snakes;
-    }
-
-    public void setSnakes(ArrayList<Battlesnake> snakes) {
-        this.snakes = snakes;
     }
 }
