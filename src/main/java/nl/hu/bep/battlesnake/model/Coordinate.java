@@ -15,7 +15,11 @@ public class Coordinate {
     }
 
     public Coordinate getOffset(int offset) {
-        return new Coordinate(x + offset, y + offset);
+        return getOffset(offset, offset);
+    }
+
+    public Coordinate getOffset(int offsetX, int offsetY) {
+        return new Coordinate(x + offsetX, y + offsetY);
     }
 
     public ArrayList<Coordinate> getOffsets(int minOffset, int maxOffset) {
