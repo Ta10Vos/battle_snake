@@ -7,6 +7,10 @@ import static java.util.Collections.unmodifiableList;
 
 public class BoardMap {
     private List<List<BoardTile>> map2D = new ArrayList<>();
+    private final int minX = 0;
+    private final int minY = 0;
+    private int maxX = 0;
+    private int maxY = 0;
 
     public BoardMap() {
 
@@ -26,10 +30,8 @@ public class BoardMap {
             map2D.set(i, unmodifiableList(row));
         }
         this.map2D = unmodifiableList(this.map2D);
-    }
-
-    public BoardTile getBoardTile(Coordinate coordinate) {
-        return getBoardTile(coordinate.y, coordinate.x);
+        maxX = map2D.get(0).size();
+        maxY = map2D.size();
     }
 
     public BoardTile getBoardTile(int y, int x) {
@@ -41,9 +43,11 @@ public class BoardMap {
         Coordinate minCoordinate = coordinate.getOffset(-range);
         Coordinate maxCoordinate = coordinate.getOffset(range);
 
-        for (int i = minCoordinate.y; i <= maxCoordinate.y; i++) {
-            for (int j = minCoordinate.x; j <= maxCoordinate.x; j++) {
-                result.add(getBoardTile(i, j));
+        for (int y = minCoordinate.y; y <= maxCoordinate.y; y++) {
+            for (int x = minCoordinate.x; x <= maxCoordinate.x; x++) {
+                if (x < 0 || x > maxX) continue;
+                if (y < 0 || y > maxY) continue;
+                result.add(getBoardTile(y, x));
             }
         }
 
