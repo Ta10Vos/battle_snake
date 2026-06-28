@@ -58,7 +58,7 @@ public class MapBuilder {
             int lastIndex = snake.getBody().size() - 1;
 
             // We only need to save the tail
-            if (snake.getHead().equals(you.getHead())) {
+            if (snake.getId().equals(you.getId())) {
                 youTail = body.get(lastIndex);
                 continue;
             }
