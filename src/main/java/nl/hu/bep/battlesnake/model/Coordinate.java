@@ -14,14 +14,14 @@ public class Coordinate {
         this.y = y;
     }
 
-    public Coordinate getOffsetCoordinate(int offset) {
+    public Coordinate getOffset(int offset) {
         return new Coordinate(x + offset, y + offset);
     }
 
     public ArrayList<Coordinate> getOffsets(int minOffset, int maxOffset) {
         ArrayList<Coordinate> offsets = new ArrayList<>();
-        offsets.add(getOffsetCoordinate(-minOffset));
-        offsets.add(getOffsetCoordinate(maxOffset));
+        offsets.add(getOffset(-minOffset));
+        offsets.add(getOffset(maxOffset));
         return offsets;
     }
 
