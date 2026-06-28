@@ -1,7 +1,4 @@
-package nl.hu.bep.battlesnake.map;
-
-import nl.hu.bep.battlesnake.model.BoardTile;
-import nl.hu.bep.battlesnake.model.Coordinate;
+package nl.hu.bep.battlesnake.model;
 
 import java.util.ArrayList;
 import java.util.List;

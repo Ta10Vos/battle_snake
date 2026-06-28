@@ -1,8 +1,8 @@
 package nl.hu.bep.battlesnake.model.requests;
 
-import nl.hu.bep.battlesnake.model.Battlesnake;
-import nl.hu.bep.battlesnake.model.Board;
-import nl.hu.bep.battlesnake.model.Game;
+import nl.hu.bep.battlesnake.model.battlesnake_API.Battlesnake;
+import nl.hu.bep.battlesnake.model.battlesnake_API.Board;
+import nl.hu.bep.battlesnake.model.battlesnake_API.Game;
 
 public abstract class BaseGameRequest {
     public Game game;

@@ -1,4 +1,6 @@
-package nl.hu.bep.battlesnake.model;
+package nl.hu.bep.battlesnake.model.battlesnake_API;
+
+import nl.hu.bep.battlesnake.model.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;

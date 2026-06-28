@@ -1,4 +1,4 @@
-package nl.hu.bep.battlesnake.model;
+package nl.hu.bep.battlesnake.model.battlesnake_API;
 
 public class Ruleset {
     private String name;

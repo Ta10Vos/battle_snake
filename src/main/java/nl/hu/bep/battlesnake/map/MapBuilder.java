@@ -2,6 +2,8 @@ package nl.hu.bep.battlesnake.map;
 
 import nl.hu.bep.battlesnake.enums.TileType;
 import nl.hu.bep.battlesnake.model.*;
+import nl.hu.bep.battlesnake.model.battlesnake_API.Battlesnake;
+import nl.hu.bep.battlesnake.model.battlesnake_API.Board;
 
 import java.util.ArrayList;
 import java.util.List;
