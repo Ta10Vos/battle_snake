@@ -144,6 +144,8 @@ public class MapBuilder {
     }
 
     private void assignArea(Coordinate c, TileType type) {
+        if (c.x < 0 || c.x >= board.getWidth()) return;
+        if (c.y < 0 || c.y >= board.getHeight()) return;
         map.getAreaBoardTileList(c, 1)
                 .forEach(t -> t.replaceType(type));
     }
