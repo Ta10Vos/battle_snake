@@ -49,4 +49,14 @@ public class BoardMap {
 
         return result;
     }
+
+    public List<List<Integer>> toCostMap() {
+        List<List<Integer>> costMap = new ArrayList<>();
+        for (List<BoardTile> row : map2D) {
+            List<Integer> costRow = new ArrayList<>();
+            row.forEach(t -> costRow.add(t.getCost()));
+            costMap.add(costRow);
+        }
+        return costMap;
+    }
 }
