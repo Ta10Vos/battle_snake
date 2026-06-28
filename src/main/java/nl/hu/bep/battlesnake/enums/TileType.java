@@ -23,16 +23,16 @@ public enum TileType {
     If a neighbor has a lower value than the neighbor it gets compared against,
     then the current neighbor has higher priority.
      */
-    neighbour_tiles,// Split section
-    FOOD_NEIGHBOUR,//-10p
-    ENEMY_HEAD_NEIGHBOUR,//50p
-    ENEMY_BODY_NEIGHBOUR,//10p
-    ENEMY_TAIL_NEIGHBOUR,//0p
-    YOU_BODY_NEIGHBOUR,//15p
-    YOU_TAIL_NEIGHBOUR;//10p
+    neighbor_tiles,// Split section
+    FOOD_NEIGHBOR,//-10p
+    ENEMY_HEAD_NEIGHBOR,//50p
+    ENEMY_BODY_NEIGHBOR,//10p
+    ENEMY_TAIL_NEIGHBOR,//0p
+    YOU_BODY_NEIGHBOR,//15p
+    YOU_TAIL_NEIGHBOR;//10p
 
     public static boolean isNeighbor(TileType type) {
-        return type.compareTo(TileType.neighbour_tiles) > 0;
+        return type.compareTo(TileType.neighbor_tiles) > 0;
     }
 
     /**
@@ -55,12 +55,12 @@ public enum TileType {
             case FRIENDLY_HEAD, FRIENDLY_BODY -> 15;//hazard score
             case FRIENDLY_TAIL -> 15;//hazard score
             case YOU_TAIL -> 20;
-            case FOOD_NEIGHBOUR -> -10;
-            case ENEMY_HEAD_NEIGHBOUR -> 50;
-            case ENEMY_BODY_NEIGHBOUR -> 10;
-            case ENEMY_TAIL_NEIGHBOUR -> 0;
-            case YOU_BODY_NEIGHBOUR -> 15;
-            case YOU_TAIL_NEIGHBOUR -> 10;
+            case FOOD_NEIGHBOR -> -10;
+            case ENEMY_HEAD_NEIGHBOR -> 50;
+            case ENEMY_BODY_NEIGHBOR -> 10;
+            case ENEMY_TAIL_NEIGHBOR -> 0;
+            case YOU_BODY_NEIGHBOR -> 15;
+            case YOU_TAIL_NEIGHBOR -> 10;
             default -> 0;
         };
     }

@@ -124,14 +124,14 @@ public class MapBuilder {
     public void generateNeighbours() {
         initiateProperties(board, you);
 
-        snakeHeads.forEach(c -> assignArea(c, TileType.ENEMY_HEAD_NEIGHBOUR));
-        snakeBodies.forEach(c -> assignArea(c, TileType.ENEMY_BODY_NEIGHBOUR));
-        snakeTails.forEach(c -> assignArea(c, TileType.ENEMY_TAIL_NEIGHBOUR));
+        snakeHeads.forEach(c -> assignArea(c, TileType.ENEMY_HEAD_NEIGHBOR));
+        snakeBodies.forEach(c -> assignArea(c, TileType.ENEMY_BODY_NEIGHBOR));
+        snakeTails.forEach(c -> assignArea(c, TileType.ENEMY_TAIL_NEIGHBOR));
 
-        you.getBody().forEach(c -> assignArea(c, TileType.YOU_BODY_NEIGHBOUR));
-        assignArea(youTail, TileType.YOU_TAIL_NEIGHBOUR);
+        you.getBody().forEach(c -> assignArea(c, TileType.YOU_BODY_NEIGHBOR));
+        assignArea(youTail, TileType.YOU_TAIL_NEIGHBOR);
 
-        foods.forEach(c -> assignArea(c, TileType.FOOD_NEIGHBOUR));
+        foods.forEach(c -> assignArea(c, TileType.FOOD_NEIGHBOR));
     }
 
     private void assignArea(Coordinate c, TileType type) {
