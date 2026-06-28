@@ -6,6 +6,7 @@ import nl.hu.bep.battlesnake.model.*;
 import java.util.ArrayList;
 
 public class MapBuilder {
+    Board board;
     ArrayList<ArrayList<Coordinate>> map;
 
     ArrayList<Coordinate> snakeHeads = new ArrayList<>();
@@ -17,6 +18,7 @@ public class MapBuilder {
     Battlesnake you;
 
     public MapBuilder(Board board, Battlesnake you, boolean generateFullMapNow) {
+        this.board = board;
         generateSnakeMap(board.getSnakes());
         this.foods = board.getFood();
         this.hazards = board.getHazards();
@@ -49,14 +51,19 @@ public class MapBuilder {
 
         if (foods.contains(c)) {
             tile.setTileType(TileType.FOOD);
+            foods.remove(c);
         } else if (hazards.contains(c)) {
             tile.setTileType(TileType.HAZARD);
+            hazards.remove(c);
         } else if (snakeHeads.contains(c)) {
             tile.setTileType(TileType.ENEMY_HEAD);
+            snakeHeads.remove(c);
         } else if (snakeTails.contains(c)) {
             tile.setTileType(TileType.ENEMY_TAIL);
+            snakeTails.remove(c);
         } else if (snakeBodies.contains(c)) {
             tile.setTileType(TileType.ENEMY_BODY);
+            snakeBodies.remove(c);
         } else {
             tile.setTileType(TileType.EMPTY);
         }
