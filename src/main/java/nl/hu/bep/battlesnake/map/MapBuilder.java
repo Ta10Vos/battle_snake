@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class MapBuilder {
     Board board;
-    ArrayList<ArrayList<Coordinate>> map;
+    ArrayList<ArrayList<BoardTile>> map =  new ArrayList<>();
 
     ArrayList<Coordinate> snakeHeads = new ArrayList<>();
     ArrayList<Coordinate> snakeBodies = new ArrayList<>();
@@ -19,10 +19,10 @@ public class MapBuilder {
 
     public MapBuilder(Board board, Battlesnake you, boolean generateFullMapNow) {
         this.board = board;
-        generateSnakeMap(board.getSnakes());
         this.foods = board.getFood();
         this.hazards = board.getHazards();
         this.you = you;
+        generateSnakeMap(board.getSnakes());
 
         if (generateFullMapNow) generate();
     }
@@ -36,11 +36,12 @@ public class MapBuilder {
             if (snake.getHead().equals(you.getHead())) continue;
 
             ArrayList<Coordinate> body = snake.getBody();
+            int lastIndex = snake.getBody().size() - 1;
 
             snakeHeads.add(body.get(0));
-            snakeTails.add(body.get(snake.getLength()));
+            snakeTails.add(body.get(lastIndex));
 
-            body.remove(snake.getLength());
+            body.remove(lastIndex);
             body.remove(0);
             snakeBodies.addAll(body);
         }
@@ -76,11 +77,29 @@ public class MapBuilder {
      */
     public void generate() {
         for(int j = 0; j < board.getHeight(); j++) {
-            ArrayList<Coordinate> mapRow = new ArrayList<>();
+            ArrayList<BoardTile> mapRow = new ArrayList<>();
             for(int i = 0; i < board.getWidth(); i++) {
                 Coordinate coordinate = new Coordinate(i, j);
-                mapRow.add(switchTile(coordinate));
+                BoardTile tile = new BoardTile(coordinate);
+                mapRow.add(switchTile(tile));
             }
+            map.add(mapRow);
         }
+
+        logMap();
+    }
+
+    private void logMap() {
+        StringBuilder sb = new StringBuilder();
+        for (ArrayList<BoardTile> mapRow : map) {
+            sb.append("[ ");
+            for (BoardTile tile : mapRow) {
+                sb.append(tile.getTileType());
+                sb.append(" ");
+            }
+
+            sb.append(" ]\n");
+        }
+        System.out.println(sb.toString());
     }
 }

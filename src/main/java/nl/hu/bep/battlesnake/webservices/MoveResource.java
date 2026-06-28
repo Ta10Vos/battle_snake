@@ -1,5 +1,6 @@
 package nl.hu.bep.battlesnake.webservices;
 
+import nl.hu.bep.battlesnake.map.MapBuilder;
 import nl.hu.bep.battlesnake.model.requests.MoveRequest;
 
 import javax.ws.rs.*;
@@ -12,7 +13,7 @@ public class MoveResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response move(MoveRequest request) {
-
+        MapBuilder builder = new MapBuilder(request.board, request.you, true);
         return Response.ok().build();
     }
 }

@@ -25,7 +25,7 @@ public class Game {
      * Set the id for the current game. Can only be set once.
      */
     public void setId(String id) {
-        if (!this.id.isBlank()) return;
+        if (this.id != null) return;
         this.id = id;
     }
 

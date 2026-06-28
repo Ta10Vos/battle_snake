@@ -1,5 +1,6 @@
 package nl.hu.bep.battlesnake.webservices;
 
+import nl.hu.bep.battlesnake.map.MapBuilder;
 import nl.hu.bep.battlesnake.model.requests.StartRequest;
 
 import javax.ws.rs.*;
