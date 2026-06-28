@@ -22,6 +22,8 @@ public class MapBuilder {
     private ArrayList<Coordinate> foods;
     private ArrayList<Coordinate> hazards;
 
+    boolean finished = false;
+
     public MapBuilder(Board board, Battlesnake you, boolean generateFullMapNow) {
         initiateProperties(board, you);
 
@@ -40,6 +42,10 @@ public class MapBuilder {
         this.hazards = new ArrayList<>(board.getHazards());
         this.you = you;
         generateSnakeMap(board.getSnakes());
+    }
+
+    public BoardMap getMap() {
+        return map;
     }
 
     /**
@@ -102,6 +108,7 @@ public class MapBuilder {
         generateNeighbours();
         map.lockEditing();
         logMap();
+        finished = true;
     }
 
     /**
