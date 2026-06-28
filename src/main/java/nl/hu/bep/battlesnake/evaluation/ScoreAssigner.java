@@ -27,19 +27,7 @@ public class ScoreAssigner {
 
     private int calculateNeutral(TileType type) {
         // Baseline point-calculation
-        return switch (type) {
-            case NONE -> 0;
-            case EMPTY -> 5;
-            case WALL -> 100;
-            case FOOD -> -10;
-            case HAZARD -> 15;
-            case ENEMY_HEAD, ENEMY_BODY -> 100;
-            case ENEMY_TAIL -> 10;
-            case FRIENDLY_HEAD, FRIENDLY_BODY -> 15;//hazard score
-            case FRIENDLY_TAIL -> 15;//hazard score
-            case YOU_HEAD, YOU_BODY -> 100;
-            case YOU_TAIL -> 20;
-        };
+        return TileType.getCost(type);
     }
 
 //    private int calculateDefensive(TileType type) {
