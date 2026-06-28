@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class MapBuilder {
     Board board;
-    ArrayList<ArrayList<BoardTile>> map =  new ArrayList<>();
+    BoardMap map = new BoardMap();
 
     ArrayList<Coordinate> snakeHeads;
     ArrayList<Coordinate> snakeBodies;
@@ -105,7 +105,7 @@ public class MapBuilder {
                 BoardTile tile = new BoardTile(coordinate);
                 mapRow.add(switchTile(tile));
             }
-            map.add(mapRow);
+            map.addRow(mapRow);
         }
 
         logMap();
@@ -119,7 +119,7 @@ public class MapBuilder {
 
     private void logMap() {
         StringBuilder sb = new StringBuilder();
-        for (ArrayList<BoardTile> mapRow : map) {
+        for (ArrayList<BoardTile> mapRow : map.get()) {
             sb.append("[ ");
             for (BoardTile tile : mapRow) {
                 sb.append(tile.getTileType());
