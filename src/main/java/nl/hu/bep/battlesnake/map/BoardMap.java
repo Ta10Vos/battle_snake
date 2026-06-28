@@ -15,7 +15,7 @@ public class BoardMap {
 
     }
 
-    public ArrayList<ArrayList<BoardTile>> get() {
+    public List<List<BoardTile>> get() {
         return map2D;
     }
 

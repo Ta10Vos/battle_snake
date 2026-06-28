@@ -15,7 +15,7 @@ public class ScoreAssigner {
         this.activePlaystyle = activePlaystyle;
     }
 
-    public calculateCost(BoardTile tile) {
+    public void calculateCost(BoardTile tile) {
         TileType tileType = tile.getTileType();
         tile.setCost(calculateNeutral(tileType));
 //        tile.setCost(switch (activePlaystyle) {

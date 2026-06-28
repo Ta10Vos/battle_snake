@@ -4,6 +4,7 @@ import nl.hu.bep.battlesnake.enums.TileType;
 import nl.hu.bep.battlesnake.model.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MapBuilder {
     Board board;
@@ -141,7 +142,7 @@ public class MapBuilder {
 
     private void logMap() {
         StringBuilder sb = new StringBuilder();
-        for (ArrayList<BoardTile> mapRow : map.get()) {
+        for (List<BoardTile> mapRow : map.get()) {
             sb.append("[ ");
             for (BoardTile tile : mapRow) {
                 sb.append(tile.getTileType());
