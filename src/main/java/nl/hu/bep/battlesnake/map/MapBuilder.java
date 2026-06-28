@@ -7,18 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MapBuilder {
-    Board board;
-    BoardMap map = new BoardMap();
+    private Board board;
+    private BoardMap map = new BoardMap();
 
-    ArrayList<Coordinate> snakeHeads;
-    ArrayList<Coordinate> snakeBodies;
-    ArrayList<Coordinate> snakeTails;
+    private ArrayList<Coordinate> snakeHeads;
+    private ArrayList<Coordinate> snakeBodies;
+    private ArrayList<Coordinate> snakeTails;
 
-    Coordinate youTail;
+    private Battlesnake you;
+    private Coordinate youTail;
 
-    ArrayList<Coordinate> foods;
-    ArrayList<Coordinate> hazards;
-    Battlesnake you;
+    private ArrayList<Coordinate> foods;
+    private ArrayList<Coordinate> hazards;
 
     public MapBuilder(Board board, Battlesnake you, boolean generateFullMapNow) {
         initiateProperties(board, you);
@@ -34,8 +34,8 @@ public class MapBuilder {
         hazards = new ArrayList<>();
 
         this.board = board;
-        this.foods = board.getFood();
-        this.hazards = board.getHazards();
+        this.foods = new ArrayList<>(board.getFood());
+        this.hazards = new ArrayList<>(board.getHazards());
         this.you = you;
         generateSnakeMap(board.getSnakes());
     }
@@ -44,9 +44,9 @@ public class MapBuilder {
      * Generate the snakeHeads, snakeBodies and snakeTails coordinates.
      * @param snakes The list of all Battlesnakes
      */
-    private void generateSnakeMap(ArrayList<Battlesnake> snakes) {
+    private void generateSnakeMap(List<Battlesnake> snakes) {
         for (Battlesnake snake : snakes) {
-            ArrayList<Coordinate> body = snake.getBody();
+            ArrayList<Coordinate> body = new ArrayList<>(snake.getBody());
             int lastIndex = snake.getBody().size() - 1;
 
             // We only need to save the tail
