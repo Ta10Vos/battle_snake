@@ -17,7 +17,7 @@ public class ScoreAssigner {
 
     public void calculateCost(BoardTile tile) {
         TileType tileType = tile.getTileType();
-        tile.setCost(calculateNeutral(tileType));
+//        tile.setCost(calculateNeutral(tileType));
 //        tile.setCost(switch (activePlaystyle) {
 //            case DEFENSIVE -> calculateDefensive(tileType);
 //            case NEUTRAL -> calculateNeutral(tileType);
