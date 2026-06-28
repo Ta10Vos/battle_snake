@@ -37,4 +37,26 @@ public class BoardTile {
     public void setTileType(TileType tileType) {
         this.tileType = tileType;
     }
+
+    public void replaceType(TileType type) {
+        replaceType(type, false);
+    }
+
+    public void replaceType(TileType type, boolean force) {
+        if (!force) {
+            // Neighbors can overwrite each other based on priority
+            if (TileType.isNeighbor(type)) {
+                if (TileType.isNeighbor(tileType)) {
+                    // Lower number = higher priority: Overwrite
+                    if (type.compareTo(this.tileType) < 0) force = true;
+                }
+            }
+
+            if (type != TileType.EMPTY && !force) {// Can only overwrite empty tiles
+                return;
+            }
+        }
+
+        this.tileType = type;
+    }
 }
