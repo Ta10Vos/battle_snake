@@ -18,10 +18,6 @@ public class BoardTile {
         return cost;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
     public Coordinate getCoordinate() {
         return coordinate;
     }
@@ -36,6 +32,7 @@ public class BoardTile {
 
     public void setTileType(TileType tileType) {
         this.tileType = tileType;
+        this.cost = TileType.getCost(tileType);
     }
 
     public void replaceType(TileType type) {
@@ -57,6 +54,6 @@ public class BoardTile {
             }
         }
 
-        this.tileType = type;
+        setTileType(type);
     }
 }
