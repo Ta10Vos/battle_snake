@@ -1,5 +1,6 @@
 package nl.hu.bep.battlesnake.webservices;
 
+import nl.hu.bep.battlesnake.enums.MoveType;
 import nl.hu.bep.battlesnake.evaluation.MoveResult;
 import nl.hu.bep.battlesnake.evaluation.ShortestPath;
 import nl.hu.bep.battlesnake.map.MapBuilder;
@@ -20,7 +21,7 @@ public class MoveResource {
 
         ShortestPath pathFinder = new ShortestPath(builder.getMap());
         MoveResult result = pathFinder.run(request.you.getHead(), request.board.getFood().get(0));
-        String move = result.getMoveType().toString();
+        String move = MoveType.stringify(result.getMoveType());
         return Response
                 .ok()
                 .entity(new MoveResponse(move, ""))
