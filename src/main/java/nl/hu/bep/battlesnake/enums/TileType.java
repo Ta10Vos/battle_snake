@@ -56,7 +56,8 @@ public enum TileType {
     public static int getCost(TileType type) {
         return switch (type) {
             case EMPTY -> 3;
-            case WALL, ENEMY_HEAD, ENEMY_BODY, YOU_HEAD, YOU_BODY -> 1000;
+            case WALL, ENEMY_BODY, YOU_HEAD, YOU_BODY -> 1000;
+            case ENEMY_HEAD -> 1000;
             case FOOD -> 1;
             case HAZARD -> 5;
             case ENEMY_TAIL, YOU_TAIL -> 2;

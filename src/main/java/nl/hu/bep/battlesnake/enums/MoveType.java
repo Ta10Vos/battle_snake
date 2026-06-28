@@ -1,6 +1,6 @@
 package nl.hu.bep.battlesnake.enums;
 
-public enum Move {
+public enum MoveType {
     NONE,
     UP,
     DOWN,
