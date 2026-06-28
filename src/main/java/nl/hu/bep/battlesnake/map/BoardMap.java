@@ -4,9 +4,12 @@ import nl.hu.bep.battlesnake.model.BoardTile;
 import nl.hu.bep.battlesnake.model.Coordinate;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.Collections.unmodifiableList;
 
 public class BoardMap {
-    ArrayList<ArrayList<BoardTile>> map2D = new ArrayList<>();
+    private List<List<BoardTile>> map2D = new ArrayList<>();
 
     public BoardMap() {
 
@@ -16,8 +19,16 @@ public class BoardMap {
         return map2D;
     }
 
-    public void set(ArrayList<ArrayList<BoardTile>> map2D) {
-        this.map2D = map2D;
+    public void addRow(ArrayList<BoardTile> row) {
+        this.map2D.add(row);
+    }
+
+    public void lockEditing() {
+        for (int i = 0; i < this.map2D.size(); i++) {
+            List<BoardTile> row = map2D.get(i);
+            map2D.set(i, unmodifiableList(row));
+        }
+        this.map2D = unmodifiableList(this.map2D);
     }
 
     public BoardTile getBoardTile(Coordinate coordinate) {
