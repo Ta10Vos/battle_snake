@@ -16,17 +16,13 @@ public class ScoreAssigner {
     }
 
     public calculateCost(BoardTile tile) {
-        switch (activePlaystyle) {
-            case DEFENSIVE -> {
-
-            }
-            case NEUTRAL -> {
-
-            }
-            case OFFENSIVE -> {
-
-            }
-        }
+        TileType tileType = tile.getTileType();
+        tile.setCost(calculateNeutral(tileType));
+//        tile.setCost(switch (activePlaystyle) {
+//            case DEFENSIVE -> calculateDefensive(tileType);
+//            case NEUTRAL -> calculateNeutral(tileType);
+//            case OFFENSIVE -> calculateOffensive(tileType);
+//        });
     }
 
     private int calculateNeutral(TileType type) {
