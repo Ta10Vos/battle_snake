@@ -25,13 +25,59 @@ public class ShortestPath {
     }
 
     public MoveResult run(Coordinate start, Coordinate end) {
-        Point start = new Point(start.);
+        Point startPoint = (Point) start;
+        Point endPoint = (Point) end;
 
+        MoveResult result = findPath(startPoint, endPoint);
+        System.out.println();
     }
 
-    public List<Point> findPath(Point start, Point end) {
+    /**
+     * Very simple algorithm:
+     * Find the next available step that's available and not yet tried
+     * @param start Starting point
+     * @param end The goal coordinates we want to get to
+     * @return MoveResult containing the path and the total cost of the path.
+     */
+    public MoveResult findPath(Point start, Point end) {
         boolean finished = false;
         List<Point> used =  new ArrayList<>();
+        used.add(start);
+
+        while (!finished) {
+            List<Point> newOpen = new ArrayList<>();
+            for (int i = 0; i < used.size(); i++) {
+                Point point = used.get(i);
+                for (Point neighbor : findNeighbors(point)) {
+                    if (!used.contains(neighbor) && !newOpen.contains(neighbor)) {
+                        newOpen.add(neighbor);
+                    }
+                }
+            }
+
+            // If we have reached the goal
+            for (Point point : newOpen) {
+                used.add(point);
+                if (end.equals(point)) {
+                    finished = true;
+                    break;
+                }
+            }
+
+            // If there is no more available path
+            if (!finished && newOpen.isEmpty()) {
+                return null;
+            }
+        }
+
+        MoveResult result = new MoveResult();
+        Point point = used.getLast();
+        while (point.previous != null) {
+            int cost = costMap.get(point.y).get(point.x);
+            result.addToPath(point, cost);
+            point = point.previous;
+        }
+        return result;
     }
 
     private boolean canEnterTile(Point point) {
