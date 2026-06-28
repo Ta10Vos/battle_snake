@@ -1,12 +1,12 @@
 package nl.hu.bep.battlesnake.enums;
 
-public enum PlayStyle {
+public enum Playstyle {
     /**
      * Assign more points on:
-     * - Empty spaces (3x3) around other snake heads
-     * - Empty spaces (5x5) around food where other snake heads are near
+     * - (+25) Empty spaces (3x3) around other snake heads
+     * - (+15) Empty spaces (5x5) around food where other snake heads are near
      * Assign less points on:
-     * - Empty spaces (5x5) around other snake tails
+     * - (-1) Empty spaces (5x5) around other snake tails
      * - Empty spaces (3x3) around snake bodies
      * - Empty spaces (3x3) around food
      */

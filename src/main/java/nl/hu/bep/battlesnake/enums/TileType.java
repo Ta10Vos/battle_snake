@@ -9,14 +9,14 @@ public enum TileType {
     HAZARD,//15p
     // Enemy snakes
     ENEMY_HEAD,//100p
-    ENEMY_BODY,//75p
-    ENEMY_TAIL,//20p
+    ENEMY_BODY,//100p
+    ENEMY_TAIL,//10p
     // Friendly snakes
-    FRIENDLY_HEAD,//{EMPTY}p
-    FRIENDLY_BODY,//{EMPTY}p
-    FRIENDLY_TAIL,//{EMPTY}p
+    FRIENDLY_HEAD,//{HAZARD}p
+    FRIENDLY_BODY,//{HAZARD}p
+    FRIENDLY_TAIL,//{HAZARD}p
     // You
     YOU_HEAD,//100p
     YOU_BODY,//100p
-    YOU_TAIL,//30p
+    YOU_TAIL,//20p
 }
