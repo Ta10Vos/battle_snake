@@ -48,7 +48,7 @@ public class BoardTile {
             if (TileType.isNeighbor(type)) {
                 if (TileType.isNeighbor(tileType)) {
                     // Lower number = higher priority: Overwrite
-                    if (type.compareTo(this.tileType) < 0) force = true;
+                    if (type.hasPriorityOver(tileType)) force = true;
                 }
             }
 

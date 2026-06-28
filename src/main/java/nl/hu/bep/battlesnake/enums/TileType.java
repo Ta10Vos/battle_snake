@@ -21,7 +21,7 @@ public enum TileType {
     YOU_TAIL,//4p
     /* Split section to know where neighbors are.
     If a neighbor has a lower value than the neighbor it gets compared against,
-    then that neighbor has higher priority.
+    then the current neighbor has higher priority.
      */
     neighbour_tiles,// Split section
     FOOD_NEIGHBOUR,//-10p
@@ -33,6 +33,16 @@ public enum TileType {
 
     public static boolean isNeighbor(TileType type) {
         return type.compareTo(TileType.neighbour_tiles) > 0;
+    }
+
+    /**
+     * See whether the current TileType has priority over the given TileType
+     * @param type the type you're comparing against.
+     * @return boolean indicating whether the current type has a higher priority
+     * (lower number) than the given type.
+     */
+    public boolean hasPriorityOver(TileType type) {
+        return this.compareTo(type) < 0;
     }
 
     public static int getCost(TileType type) {
