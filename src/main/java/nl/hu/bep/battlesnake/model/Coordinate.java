@@ -1,5 +1,6 @@
 package nl.hu.bep.battlesnake.model;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Coordinate {
@@ -11,6 +12,17 @@ public class Coordinate {
     public Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public Coordinate getOffsetCoordinate(int offset) {
+        return new Coordinate(x + offset, y + offset);
+    }
+
+    public ArrayList<Coordinate> getOffsets(int minOffset, int maxOffset) {
+        ArrayList<Coordinate> offsets = new ArrayList<>();
+        offsets.add(getOffsetCoordinate(-minOffset));
+        offsets.add(getOffsetCoordinate(maxOffset));
+        return offsets;
     }
 
     @Override
