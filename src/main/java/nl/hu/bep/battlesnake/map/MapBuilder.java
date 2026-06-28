@@ -94,10 +94,16 @@ public class MapBuilder {
         return tile;
     }
 
+    public void generate() {
+        buildMap();
+        generateNeighbours();
+        map.lockEditing();
+    }
+
     /**
      * Create the map based off the Board and "you" Battlesnake object
      */
-    public void generate() {
+    public void buildMap() {
         for(int j = 0; j < board.getHeight(); j++) {
             ArrayList<BoardTile> mapRow = new ArrayList<>();
             for(int i = 0; i < board.getWidth(); i++) {
@@ -111,10 +117,26 @@ public class MapBuilder {
         logMap();
     }
 
+    /**
+     * Tile Neighbors get generated after the initial generation.
+     * Neighbors CANNOT overwrite non-empty tiles
+     */
     public void generateNeighbours() {
         initiateProperties(board, you);
 
-        for(int j = 0; j < board.getHeight(); j++) {}
+        snakeHeads.forEach(c -> assignArea(c, TileType.ENEMY_HEAD_NEIGHBOUR));
+        snakeBodies.forEach(c -> assignArea(c, TileType.ENEMY_BODY_NEIGHBOUR));
+        snakeTails.forEach(c -> assignArea(c, TileType.ENEMY_TAIL_NEIGHBOUR));
+
+        you.getBody().forEach(c -> assignArea(c, TileType.YOU_BODY_NEIGHBOUR));
+        assignArea(youTail, TileType.YOU_TAIL_NEIGHBOUR);
+
+        foods.forEach(c -> assignArea(c, TileType.FOOD_NEIGHBOUR));
+    }
+
+    private void assignArea(Coordinate c, TileType type) {
+        map.getAreaBoardTileList(c, 1)
+                .forEach(t -> t.replaceType(type));
     }
 
     private void logMap() {
