@@ -21,7 +21,8 @@ public class EndResource {
 
         ShortestPath pathFinder = new ShortestPath(builder.getMap());
         MoveResult result = pathFinder.run(request.you.getHead(), request.board.getFood().get(0));
-        String move = MoveType.stringify(result.getMoveType());
+        result.calculateMoveType();
+        String move = result.getMoveType().toString();
         return Response
                 .ok()
                 .entity(new MoveResponse(move, ""))
