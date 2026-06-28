@@ -1,5 +1,7 @@
 package nl.hu.bep.battlesnake.webservices;
 
+import nl.hu.bep.battlesnake.evaluation.MoveResult;
+import nl.hu.bep.battlesnake.evaluation.ShortestPath;
 import nl.hu.bep.battlesnake.map.MapBuilder;
 import nl.hu.bep.battlesnake.model.requests.MoveRequest;
 
@@ -14,6 +16,9 @@ public class MoveResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response move(MoveRequest request) {
         MapBuilder builder = new MapBuilder(request.board, request.you, true);
+
+        ShortestPath pathFinder = new ShortestPath(builder.getMap());
+        MoveResult result = pathFinder.run(request.you.getHead(), request.board.getFood().get(0));
         return Response.ok().build();
     }
 }
