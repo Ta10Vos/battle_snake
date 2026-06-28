@@ -10,8 +10,8 @@ public class Coordinate {
     public Coordinate() {}
 
     public Coordinate(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.x = Math.max(x, 0);
+        this.y = Math.max(y, 0);
     }
 
     public Coordinate getOffset(int offset) {
