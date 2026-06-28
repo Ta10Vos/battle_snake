@@ -9,22 +9,34 @@ public class MapBuilder {
     Board board;
     ArrayList<ArrayList<BoardTile>> map =  new ArrayList<>();
 
-    ArrayList<Coordinate> snakeHeads = new ArrayList<>();
-    ArrayList<Coordinate> snakeBodies = new ArrayList<>();
-    ArrayList<Coordinate> snakeTails = new ArrayList<>();
+    ArrayList<Coordinate> snakeHeads;
+    ArrayList<Coordinate> snakeBodies;
+    ArrayList<Coordinate> snakeTails;
 
-    ArrayList<Coordinate> foods = new ArrayList<>();
-    ArrayList<Coordinate> hazards = new ArrayList<>();
+    Coordinate youTail;
+
+    ArrayList<Coordinate> foods;
+    ArrayList<Coordinate> hazards;
     Battlesnake you;
 
     public MapBuilder(Board board, Battlesnake you, boolean generateFullMapNow) {
+        initiateProperties(board, you);
+
+        if (generateFullMapNow) generate();
+    }
+
+    private void initiateProperties(Board board, Battlesnake you) {
+        snakeHeads = new ArrayList<>();
+        snakeBodies = new ArrayList<>();
+        snakeTails = new ArrayList<>();
+        foods = new ArrayList<>();
+        hazards = new ArrayList<>();
+
         this.board = board;
         this.foods = board.getFood();
         this.hazards = board.getHazards();
         this.you = you;
         generateSnakeMap(board.getSnakes());
-
-        if (generateFullMapNow) generate();
     }
 
     /**
@@ -33,10 +45,14 @@ public class MapBuilder {
      */
     private void generateSnakeMap(ArrayList<Battlesnake> snakes) {
         for (Battlesnake snake : snakes) {
-            if (snake.getHead().equals(you.getHead())) continue;
-
             ArrayList<Coordinate> body = snake.getBody();
             int lastIndex = snake.getBody().size() - 1;
+
+            // We only need to save the tail
+            if (snake.getHead().equals(you.getHead())) {
+                youTail = body.get(lastIndex);
+                continue;
+            }
 
             snakeHeads.add(body.get(0));
             snakeTails.add(body.get(lastIndex));
@@ -65,6 +81,12 @@ public class MapBuilder {
         } else if (snakeBodies.contains(c)) {
             tile.setTileType(TileType.ENEMY_BODY);
             snakeBodies.remove(c);
+        } else if (c.equals(you.getHead())) {
+            tile.setTileType(TileType.YOU_HEAD);
+        } else if (c.equals(youTail)) {
+            tile.setTileType(TileType.YOU_TAIL);
+        } else if (you.getBody().contains(c)) {
+            tile.setTileType(TileType.YOU_BODY);
         } else {
             tile.setTileType(TileType.EMPTY);
         }
@@ -87,6 +109,12 @@ public class MapBuilder {
         }
 
         logMap();
+    }
+
+    public void generateNeighbours() {
+        initiateProperties(board, you);
+
+        for(int j = 0; j < board.getHeight(); j++) {}
     }
 
     private void logMap() {
