@@ -99,6 +99,7 @@ public class MapBuilder {
         buildMap();
         generateNeighbours();
         map.lockEditing();
+        logMap();
     }
 
     /**
@@ -114,8 +115,6 @@ public class MapBuilder {
             }
             map.addRow(mapRow);
         }
-
-        logMap();
     }
 
     /**
