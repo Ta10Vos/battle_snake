@@ -5,5 +5,15 @@ public enum MoveType {
     UP,
     DOWN,
     LEFT,
-    RIGHT
+    RIGHT;
+
+    public String toString() {
+        return switch (this) {
+            case UP -> "up";
+            case DOWN -> "down";
+            case LEFT -> "left";
+            case RIGHT -> "right";
+            default -> "none";
+        };
+    }
 }
