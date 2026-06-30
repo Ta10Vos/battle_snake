@@ -1,13 +1,19 @@
 package nl.hu.bep.battlesnake.evaluation;
 
 import nl.hu.bep.battlesnake.model.Coordinate;
+import nl.hu.bep.battlesnake.util.Calculator;
 
-public class Point extends Coordinate {
+public class Point {
     public Point previous;
-    private Integer cost;
+    public int x;
+    public int y;
+
+    public int gCost = 1000;// cost of traveling to this Point
+    public int hCost;// estimated cost of the cheapest path from this to the goal
 
     public Point(Coordinate coordinate) {
-        super(coordinate.x, coordinate.y);
+        this.x = coordinate.x;
+        this.y = coordinate.y;
     }
 
     public Point(int x, int y, Point previous) {
@@ -16,21 +22,30 @@ public class Point extends Coordinate {
         this.previous = previous;
     }
 
-    public int getCost() {
-        return cost;
+    public int getFCost() {
+        return gCost + hCost;
     }
 
-    public void setCost(Integer cost) {
-        if (this.cost != null) return;
-        this.cost = cost;
+    public int getHCost() {
+        return hCost;
     }
 
-    @Override
+    public void setHCost(int hCost) {
+        this.hCost = hCost;
+    }
+
+    public int getGCost() {
+        return gCost;
+    }
+
+    public void setGCost(Point endGoal) {
+        gCost = Calculator.manhattanDistance(this.x, this.y, endGoal.x, endGoal.y);
+    }
+
     public Point getOffset(int offset) {
         return getOffset(offset, offset);
     }
 
-    @Override
     public Point getOffset(int offsetX, int offsetY) {
         return new Point(x + offsetX, y + offsetY, this);
     }
@@ -38,9 +53,10 @@ public class Point extends Coordinate {
     @Override
     public String toString() {
         return "Point{" +
-                "y=" + y +
-                ", x=" + x +
-                ", cost=" + cost +
+                "previous=" + previous +
+                ", gCost=" + gCost +
+                ", hCost=" + hCost +
+                ", fCost=" + getFCost() +
                 '}';
     }
 }
