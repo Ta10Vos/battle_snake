@@ -8,8 +8,8 @@ public class Point {
     public int x;
     public int y;
 
-    public int gCost = 1000;// cost of traveling to this Point
-    public int hCost;// estimated cost of the cheapest path from this to the goal
+    private int gCost = 1000;// cost of traveling to this Point
+    private int hCost;// estimated cost of the cheapest path from this to the goal
 
     public Point(Coordinate coordinate) {
         this.x = coordinate.x;
@@ -22,24 +22,28 @@ public class Point {
         this.previous = previous;
     }
 
+    /**
+     * Cost to this point (gCost) + Estimated cost to the goal (hCost)
+     * @return
+     */
     public int getFCost() {
         return gCost + hCost;
-    }
-
-    public int getHCost() {
-        return hCost;
-    }
-
-    public void setHCost(int hCost) {
-        this.hCost = hCost;
     }
 
     public int getGCost() {
         return gCost;
     }
 
-    public void setGCost(Point endGoal) {
-        gCost = Calculator.manhattanDistance(this.x, this.y, endGoal.x, endGoal.y);
+    public void setGCost(int gCost) {
+        this.gCost = gCost;
+    }
+
+    public int getHCost() {
+        return hCost;
+    }
+
+    public void setHCost(Point endGoal) {
+        hCost = Calculator.manhattanDistance(this.x, this.y, endGoal.x, endGoal.y);
     }
 
     public Point getOffset(int offset) {
