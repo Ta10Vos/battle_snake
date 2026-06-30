@@ -1,5 +1,7 @@
-package nl.hu.bep.battlesnake.evaluation;
+package nl.hu.bep.battlesnake.pathfinding;
 
+import nl.hu.bep.battlesnake.evaluation.MoveResult;
+import nl.hu.bep.battlesnake.evaluation.Node;
 import nl.hu.bep.battlesnake.model.BoardMap;
 import nl.hu.bep.battlesnake.model.Coordinate;
 
@@ -8,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class ShortestPath {
+public class AStarPathFinder {
     private List<List<Integer>> costMap;
 
     private final int minX = 0;
@@ -16,7 +18,7 @@ public class ShortestPath {
     private final int maxX;
     private final int maxY;
 
-    public ShortestPath(BoardMap map) {
+    public AStarPathFinder(BoardMap map) {
         this.costMap = map.toCostMap();
         this.maxX = costMap.get(0).size() - 1;
         this.maxY = costMap.size() - 1;
