@@ -3,20 +3,20 @@ package nl.hu.bep.battlesnake.evaluation;
 import nl.hu.bep.battlesnake.model.Coordinate;
 import nl.hu.bep.battlesnake.util.Calculator;
 
-public class Point {
-    public Point previous;
+public class Node {
+    public Node previous;
     public int x;
     public int y;
 
     private int gCost = 1000;// cost of traveling to this Point
     private int hCost;// estimated cost of the cheapest path from this to the goal
 
-    public Point(Coordinate coordinate) {
+    public Node(Coordinate coordinate) {
         this.x = coordinate.x;
         this.y = coordinate.y;
     }
 
-    public Point(int x, int y, Point previous) {
+    public Node(int x, int y, Node previous) {
         this.x = x;
         this.y = y;
         this.previous = previous;
@@ -42,16 +42,16 @@ public class Point {
         return hCost;
     }
 
-    public void setHCost(Point endGoal) {
+    public void setHCost(Node endGoal) {
         hCost = Calculator.manhattanDistance(this.x, this.y, endGoal.x, endGoal.y);
     }
 
-    public Point getOffset(int offset) {
+    public Node getOffset(int offset) {
         return getOffset(offset, offset);
     }
 
-    public Point getOffset(int offsetX, int offsetY) {
-        return new Point(x + offsetX, y + offsetY, this);
+    public Node getOffset(int offsetX, int offsetY) {
+        return new Node(x + offsetX, y + offsetY, this);
     }
 
     @Override

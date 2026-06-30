@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MoveResult {
-    private List<Point> path = new ArrayList<>();
+    private List<Node> path = new ArrayList<>();
     private Integer pathCost = 0;
     private MoveType moveType;
 
@@ -23,16 +23,16 @@ public class MoveResult {
         }
     }
 
-    public void addToPath(Point point) {
-        path.add(0, point);
-        pathCost += point.getGCost();
+    public void addToPath(Node node) {
+        path.add(0, node);
+        pathCost += node.getGCost();
     }
 
     public int getPathCost() {
         return pathCost;
     }
 
-    public List<Point> getPath() {
+    public List<Node> getPath() {
         return path;
     }
 
@@ -43,8 +43,8 @@ public class MoveResult {
     public void calculateMoveType() {
         if (path.size() <= 1) return;
 
-        Point start = path.get(0);
-        Point next = path.get(1);
+        Node start = path.get(0);
+        Node next = path.get(1);
 
         if (next.y < start.y) moveType = MoveType.UP;
         else if (next.y > start.y) moveType = MoveType.DOWN;
