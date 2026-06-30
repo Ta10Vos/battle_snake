@@ -1,26 +1,22 @@
 package nl.hu.bep.battlesnake.evaluation;
 
-import nl.hu.bep.battlesnake.enums.TileType;
-import nl.hu.bep.battlesnake.map.MapBuilder;
 import nl.hu.bep.battlesnake.model.BoardMap;
 import nl.hu.bep.battlesnake.model.Coordinate;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class ShortestPath {
-    private BoardMap map;
     private List<List<Integer>> costMap;
-    private List<Coordinate> walkedPath;
-    private List<Coordinate> outPath;
 
     private final int minX = 0;
     private final int minY = 0;
-    private int maxX;
-    private int maxY;
+    private final int maxX;
+    private final int maxY;
 
     public ShortestPath(BoardMap map) {
-        this.map = map;
         this.costMap = map.toCostMap();
         this.maxX = costMap.get(0).size() - 1;
         this.maxY = costMap.size() - 1;
@@ -36,52 +32,56 @@ public class ShortestPath {
     }
 
     /**
-     * Very simple algorithm:
+     * A* algorithm, find a goal based on the points provided by the costMap.
      * Find the next available step that's available and not yet tried
      * @param start Starting point
      * @param end The goal coordinates we want to get to
-     * @return MoveResult containing the path and the total cost of the path.
+     * @return MoveResult containing the path (full in previous chain) and the total cost of the path.
      */
     public MoveResult findPath(Point start, Point end) {
-        boolean finished = false;
-        List<Point> used = new ArrayList<>();
-        used.add(start);
+        PriorityQueue<Point> openSet = new PriorityQueue<>();
+        HashSet<Point> closedSet = new HashSet<>();
 
-        while (!finished) {
-            List<Point> newOpen = new ArrayList<>();
-            for (int i = 0; i < used.size(); i++) {
-                Point point = used.get(i);
-                for (Point neighbor : findNeighbors(point)) {
-                    if (!used.contains(neighbor) && !newOpen.contains(neighbor)) {
-                        newOpen.add(neighbor);
+        openSet.add(start);
+
+        while (true) {
+            Point current = openSet.poll();
+            // If there's no more explorable Points
+            if (current == null) return null;
+
+            for (Point neighbor : findNeighbors(current)) {
+                int moveCost = current.getGCost() + costMap.get(neighbor.y).get(neighbor.x);
+                // If moving
+                if (moveCost < neighbor.getGCost() || !openSet.contains(neighbor)) {
+                    // Set neighbor variables
+                    neighbor.setGCost(moveCost);
+                    neighbor.setHCost(end);
+                    neighbor.previous = current;
+
+                    if (!openSet.contains(neighbor)) {
+                        openSet.add(neighbor);
                     }
+                }
+                if (!closedSet.contains(neighbor) && !openSet.contains(neighbor)) {
+                    openSet.add(neighbor);
                 }
             }
 
-            // If we have reached the goal
-            for (Point point : newOpen) {
-                used.add(point);
+            // If we have explored all the neighbors,
+            // mark all explored Points as closed, so that we don't visit them.
+            for (Point point : openSet) {
+                closedSet.add(point);
+                // If we have reached the endGoal
                 if (end.equals(point)) {
-                    finished = true;
-                    break;
+                    return constructPath(current);
                 }
             }
 
             // If there is no more available path
-            if (!finished && newOpen.isEmpty()) {
-                return null;
+            if (openSet.isEmpty()) {
+                return new MoveResult(false);
             }
         }
-
-        MoveResult result = new MoveResult();
-        Point point = used.get(used.size() - 1);
-        // Walk through the points that have each other saved.
-        while (point.previous != null) {
-            point.setCost(costMap.get(point.y).get(point.x));
-            result.addToPath(point);
-            point = point.previous;
-        }
-        return result;
     }
 
     private boolean canEnterTile(Point point) {
@@ -102,5 +102,15 @@ public class ShortestPath {
         if (canEnterTile(right)) neighbors.add(right);
         if (canEnterTile(left)) neighbors.add(left);
         return neighbors;
+    }
+
+    private MoveResult constructPath(Point current) {
+        MoveResult result = new MoveResult();
+        // Walk through the points that have each other saved.
+        while (current.previous != null) {
+            result.addToPath(current);
+            current = current.previous;
+        }
+        return result;
     }
 }
