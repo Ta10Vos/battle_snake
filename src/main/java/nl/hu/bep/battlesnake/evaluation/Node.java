@@ -3,12 +3,10 @@ package nl.hu.bep.battlesnake.evaluation;
 import nl.hu.bep.battlesnake.model.Coordinate;
 import nl.hu.bep.battlesnake.util.Calculator;
 
-public class Node {
+public class Node extends Coordinate implements Comparable<Node> {
     public Node previous;
-    public int x;
-    public int y;
 
-    private int gCost = 999;// cost of traveling to this Point. Make sure if set action is forgotten, it won't be "0"
+    private int gCost;// cost of traveling to this Point. Make sure if set action is not allocated yet, it won't be "0"
     private int hCost;// estimated cost of the cheapest path from this to the goal
 
     public Node(Coordinate coordinate) {
@@ -38,20 +36,31 @@ public class Node {
         this.gCost = gCost;
     }
 
-    public int getHCost() {
-        return hCost;
-    }
-
     public void setHCost(Node endGoal) {
         hCost = Calculator.manhattanDistance(this.x, this.y, endGoal.x, endGoal.y);
     }
 
-    public Node getOffset(int offset) {
-        return getOffset(offset, offset);
-    }
-
     public Node getOffset(int offsetX, int offsetY) {
         return new Node(x + offsetX, y + offsetY, this);
+    }
+
+    /**
+     * Compare this Node to the given Node.
+     * @param other the object to be compared.
+     * @return A value <0 if this.fCost is lower than the other Node.<br>
+     * A value >0 if fCost is greater than other Node.<br>
+     * Returns 0 if the other Node is null or if both are of equal values.
+     */
+    public int compareTo(Node other) {
+        if (other == null) return 0;
+        int fCompare = Integer.compare(getFCost(), other.getFCost());
+
+        // If we do not have an equal situation
+        if (fCompare != 0)
+            return fCompare;
+
+        // If we have an equal situation, find which Node is closer to the goal.
+        return Integer.compare(hCost, other.hCost);
     }
 
     @Override

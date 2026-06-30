@@ -5,13 +5,11 @@ import nl.hu.bep.battlesnake.evaluation.Node;
 import nl.hu.bep.battlesnake.model.BoardMap;
 import nl.hu.bep.battlesnake.model.Coordinate;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class AStarPathFinder {
     private List<List<Integer>> costMap;
+    private final Node[][] nodes;
 
     private final int minX = 0;
     private final int minY = 0;
@@ -22,6 +20,13 @@ public class AStarPathFinder {
         this.costMap = map.toCostMap();
         this.maxX = costMap.get(0).size() - 1;
         this.maxY = costMap.size() - 1;
+        nodes = new Node[maxY + 1][maxX + 1];
+        // Populate the nodes list
+        for (int y = 0; y <= maxY; y++) {
+            for (int x = 0; x <= maxX; x++) {
+                nodes[y][x] = new Node(new Coordinate(x, y));
+            }
+        }
     }
 
     public MoveResult run(Coordinate start, Coordinate end) {
@@ -48,12 +53,21 @@ public class AStarPathFinder {
 
         while (true) {
             Node current = openSet.poll();
-            // If there's no more explorable Points
-            if (current == null) return null;
+
+            if (current == null) {// If there's no more explorable Points
+                return null;
+            } else if (current.equals(end)) {// If we have reached the endGoal
+                return constructPath(current);
+            }
+            // Add current Node to the explored nodes
+            closedSet.add(current);
 
             for (Node neighbor : findNeighbors(current)) {
+                // Do not visit already-explored neighbors
+                if (closedSet.contains(neighbor)) continue;
+                // Get the cost for moving to the neighboring Node
                 int moveCost = current.getGCost() + costMap.get(neighbor.y).get(neighbor.x);
-                // If moving
+                // If moving to the neighbor is cheap enough or if we haven't explored the neighbor yet
                 if (moveCost < neighbor.getGCost() || !openSet.contains(neighbor)) {
                     // Set neighbor variables
                     neighbor.setGCost(moveCost);
@@ -63,19 +77,6 @@ public class AStarPathFinder {
                     if (!openSet.contains(neighbor)) {
                         openSet.add(neighbor);
                     }
-                }
-                if (!closedSet.contains(neighbor) && !openSet.contains(neighbor)) {
-                    openSet.add(neighbor);
-                }
-            }
-
-            // If we have explored all the neighbors,
-            // mark all explored Points as closed, so that we don't visit them.
-            for (Node node : openSet) {
-                closedSet.add(node);
-                // If we have reached the endGoal
-                if (end.equals(node)) {
-                    return constructPath(current);
                 }
             }
 
@@ -92,17 +93,31 @@ public class AStarPathFinder {
         return costMap.get(node.y).get(node.x) < 500;
     }
 
-    private List<Node> findNeighbors(Node currNode) {
+    private List<Node> findNeighbors(Node current) {
         List<Node> neighbors = new ArrayList<>();
-        Node up = currNode.getOffset(0, 1);
-        Node down = currNode.getOffset(0, -1);
-        Node right = currNode.getOffset(1, 0);
-        Node left = currNode.getOffset(-1, 0);
 
-        if (canEnterTile(up)) neighbors.add(up);
-        if (canEnterTile(down)) neighbors.add(down);
-        if (canEnterTile(right)) neighbors.add(right);
-        if (canEnterTile(left)) neighbors.add(left);
+        int uY = current.y + 1;
+        int dY = current.y - 1;
+        int rX = current.x + 1;
+        int lX = current.x - 1;
+
+        if (uY <= maxY) {
+            Node up = nodes[current.y + 1][current.x];
+            if (canEnterTile(up)) neighbors.add(up);
+        }
+        if (dY >= minY) {
+            Node down = nodes[current.y - 1][current.x];
+            if (canEnterTile(down)) neighbors.add(down);
+        }
+        if (rX <= maxX) {
+            Node right = nodes[current.y][current.x + 1];
+            if (canEnterTile(right)) neighbors.add(right);
+        }
+        if (lX >= minX) {
+            Node left = nodes[current.y][current.x - 1];
+            if (canEnterTile(left)) neighbors.add(left);
+        }
+
         return neighbors;
     }
 
