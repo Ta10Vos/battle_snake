@@ -8,6 +8,7 @@ import nl.hu.bep.battlesnake.map.MapBuilder;
 import nl.hu.bep.battlesnake.model.BoardMap;
 import nl.hu.bep.battlesnake.model.requests.MoveRequest;
 import nl.hu.bep.battlesnake.model.responses.MoveResponse;
+import nl.hu.bep.battlesnake.util.ResourceManager;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -25,15 +26,8 @@ public class MoveResource {
         ShortestPath pathFinder = new ShortestPath(map);
         MoveResult result = pathFinder.run(request.you.getHead(), request.board.getFood().get(0));
 
-        System.out.println("SUCCESSFULLY CREATED A PATH:");
-        System.out.println("TOTAL COST:" + result.getPathCost());
-        System.out.println("PATH:\n---");
-        System.out.println(result.getPath().toString());
-        System.out.println("---");
-        System.out.println("PATH MAP\n---------------");
-        result.getPath().forEach(p -> map.get().get(p.y).get(p.x).setTileType(TileType.NONE));
-        MapBuilder.logMap(map);
-        System.out.println("---\nEND OF LOG");
+        ResourceManager.dumpMap(map);
+        ResourceManager.mapDebug(map, result);
 
         result.calculateMoveType();
         String move = result.getMoveType().toString();

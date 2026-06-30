@@ -4,8 +4,10 @@ import nl.hu.bep.battlesnake.enums.MoveType;
 import nl.hu.bep.battlesnake.evaluation.MoveResult;
 import nl.hu.bep.battlesnake.evaluation.ShortestPath;
 import nl.hu.bep.battlesnake.map.MapBuilder;
+import nl.hu.bep.battlesnake.model.BoardMap;
 import nl.hu.bep.battlesnake.model.requests.StartRequest;
 import nl.hu.bep.battlesnake.model.responses.MoveResponse;
+import nl.hu.bep.battlesnake.util.ResourceManager;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -19,8 +21,13 @@ public class StartResource {
     public Response startGame(StartRequest request) {
         MapBuilder builder = new MapBuilder(request.board, request.you, true);
 
-        ShortestPath pathFinder = new ShortestPath(builder.getMap());
+        BoardMap map = builder.getMap();
+        ShortestPath pathFinder = new ShortestPath(map);
         MoveResult result = pathFinder.run(request.you.getHead(), request.board.getFood().get(0));
+
+        ResourceManager.dumpMap(map);
+        ResourceManager.mapDebug(map, result);
+
         result.calculateMoveType();
         String move = result.getMoveType().toString();
         return Response
