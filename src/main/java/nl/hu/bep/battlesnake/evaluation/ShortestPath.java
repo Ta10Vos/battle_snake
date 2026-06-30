@@ -1,5 +1,7 @@
 package nl.hu.bep.battlesnake.evaluation;
 
+import nl.hu.bep.battlesnake.enums.TileType;
+import nl.hu.bep.battlesnake.map.MapBuilder;
 import nl.hu.bep.battlesnake.model.BoardMap;
 import nl.hu.bep.battlesnake.model.Coordinate;
 
@@ -29,11 +31,6 @@ public class ShortestPath {
         Point endPoint = new Point(end);
 
         MoveResult result = findPath(startPoint, endPoint);
-        System.out.println("SUCCESSFULLY CREATED A PATH:");
-        System.out.println("TOTAL COST:" + result.getPathCost());
-        System.out.println("PATH:\n---");
-        System.out.println(result.getPath().toString());
-        System.out.println("---\nEND OF LOG");
 
         return result;
     }
