@@ -8,7 +8,7 @@ public class Node {
     public int x;
     public int y;
 
-    private int gCost = 1000;// cost of traveling to this Point
+    private int gCost = 999;// cost of traveling to this Point. Make sure if set action is forgotten, it won't be "0"
     private int hCost;// estimated cost of the cheapest path from this to the goal
 
     public Node(Coordinate coordinate) {
