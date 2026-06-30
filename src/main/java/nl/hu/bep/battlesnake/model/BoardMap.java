@@ -20,8 +20,13 @@ public class BoardMap {
         return map2D;
     }
 
+    /**
+     * Add a row to the map
+     * @param row The row to add to the map
+     */
     public void addRow(ArrayList<BoardTile> row) {
-        this.map2D.add(row);
+        // Y-index is mirrored. Push it in index 0.
+        this.map2D.add(0, row);
     }
 
     public void lockEditing() {
