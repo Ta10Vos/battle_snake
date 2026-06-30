@@ -9,10 +9,10 @@ public enum MoveType {
 
     public String toString() {
         return switch (this) {
-            case UP -> "up";
-            case DOWN -> "down";
-            case LEFT -> "left";
-            case RIGHT -> "right";
+            case UP -> "down";
+            case DOWN -> "up";
+            case LEFT -> "right";
+            case RIGHT -> "left";
             default -> "none";
         };
     }
