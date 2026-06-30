@@ -96,25 +96,26 @@ public class AStarPathFinder {
     private List<Node> findNeighbors(Node current) {
         List<Node> neighbors = new ArrayList<>();
 
+        // Get the values beforehand, so that we know we can use it to safely access a node
         int uY = current.y + 1;
         int dY = current.y - 1;
         int rX = current.x + 1;
         int lX = current.x - 1;
 
         if (uY <= maxY) {
-            Node up = nodes[current.y + 1][current.x];
+            Node up = nodes[uY][current.x];
             if (canEnterTile(up)) neighbors.add(up);
         }
         if (dY >= minY) {
-            Node down = nodes[current.y - 1][current.x];
+            Node down = nodes[dY][current.x];
             if (canEnterTile(down)) neighbors.add(down);
         }
         if (rX <= maxX) {
-            Node right = nodes[current.y][current.x + 1];
+            Node right = nodes[current.y][rX];
             if (canEnterTile(right)) neighbors.add(right);
         }
         if (lX >= minX) {
-            Node left = nodes[current.y][current.x - 1];
+            Node left = nodes[current.y][lX];
             if (canEnterTile(left)) neighbors.add(left);
         }
 
