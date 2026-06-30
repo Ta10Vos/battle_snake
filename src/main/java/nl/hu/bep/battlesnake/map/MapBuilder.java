@@ -107,7 +107,7 @@ public class MapBuilder {
         buildMap();
         generateNeighbours();
         map.lockEditing();
-        logMap();
+        MapBuilder.logMap(map);
         finished = true;
     }
 
@@ -150,7 +150,7 @@ public class MapBuilder {
                 .forEach(t -> t.replaceType(type));
     }
 
-    private void logMap() {
+    private static void logMap(BoardMap map) {
         StringBuilder sb = new StringBuilder();
         for (List<BoardTile> mapRow : map.get()) {
             sb.append("[ ");
