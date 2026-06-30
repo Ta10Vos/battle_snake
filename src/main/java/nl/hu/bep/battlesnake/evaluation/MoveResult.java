@@ -12,9 +12,20 @@ public class MoveResult {
 
     public MoveResult() {}
 
+    /**
+     * Create a MoveResult with the success status.
+     * @param success Give a success state. If set to false, all values will be set to high values to make this Move undesirable.
+     */
+    public MoveResult(boolean success) {
+        if (!success) {
+            pathCost = Integer.MAX_VALUE;
+            moveType = MoveType.NONE;
+        }
+    }
+
     public void addToPath(Point point) {
         path.add(0, point);
-        pathCost += point.getCost();
+        pathCost += point.getGCost();
     }
 
     public int getPathCost() {
