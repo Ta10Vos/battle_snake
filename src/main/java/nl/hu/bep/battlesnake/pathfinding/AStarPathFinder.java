@@ -34,12 +34,23 @@ public class AStarPathFinder {
     }
 
     public MoveResult run(Coordinate start, Coordinate end) {
+        resetNodes();
         Node startNode = new Node(start);
         Node endNode = new Node(end);
 
         MoveResult result = findPath(startNode, endNode);
 
         return result;
+    }
+
+    private void resetNodes() {
+        for (Node[] row : nodes) {
+            for (Node n : row) {
+                n.setGCost(Integer.MAX_VALUE);
+                n.setHCost(0);
+                n.previous = null;
+            }
+        }
     }
 
     /**
