@@ -78,4 +78,20 @@ public class Battlesnake {
     public Customization getCustomizations() {
         return customizations;
     }
+
+    @Override
+    public String toString() {
+        return "Battlesnake{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", health=" + health +
+                ", body=" + body +
+                ", latency='" + latency + '\'' +
+                ", head=" + head +
+                ", length=" + length +
+                ", shout='" + shout + '\'' +
+                ", squad='" + squad + '\'' +
+                ", customizations=" + customizations +
+                '}';
+    }
 }
