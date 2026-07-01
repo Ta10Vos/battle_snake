@@ -1,6 +1,7 @@
 package nl.hu.bep.battlesnake.webservices;
 
 import nl.hu.bep.battlesnake.evaluation.MoveResult;
+import nl.hu.bep.battlesnake.model.Coordinate;
 import nl.hu.bep.battlesnake.pathfinding.AStarPathFinder;
 import nl.hu.bep.battlesnake.map.MapBuilder;
 import nl.hu.bep.battlesnake.model.BoardMap;
@@ -22,7 +23,9 @@ public class StartResource {
 
         BoardMap map = builder.getMap();
         AStarPathFinder pathFinder = new AStarPathFinder(map);
-        MoveResult result = pathFinder.run(request.you.getHead(), request.board.getFood().get(0));
+        Coordinate startCoordinate = request.you.getHead();
+        startCoordinate.flipY(request.board.getHeight());
+        MoveResult result = pathFinder.run(startCoordinate, request.board.getFood().get(0));
 
         ResourceManager.dumpMap(map);
         ResourceManager.mapDebug(map, result);
