@@ -1,5 +1,7 @@
 package nl.hu.bep.battlesnake.model;
 
+import nl.hu.bep.battlesnake.util.Calculator;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -27,6 +29,16 @@ public class Coordinate {
         offsets.add(getOffset(-minOffset));
         offsets.add(getOffset(maxOffset));
         return offsets;
+    }
+
+    public void flipX(int maxX) {
+        int baseX = maxX / 2;
+        this.x = Calculator.flipNum(baseX, this.x);
+    }
+
+    public void flipY(int maxY) {
+        int baseY = maxY / 2;
+        this.y = Calculator.flipNum(baseY, this.y);
     }
 
     @Override

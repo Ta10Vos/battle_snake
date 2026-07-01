@@ -17,6 +17,8 @@ public class MapBuilder {
     private ArrayList<Coordinate> snakeTails;
 
     private Battlesnake you;
+    private Coordinate youHead;
+    private ArrayList<Coordinate> youBody;
     private Coordinate youTail;
 
     private ArrayList<Coordinate> foods;
@@ -27,12 +29,17 @@ public class MapBuilder {
     public MapBuilder(Board board, Battlesnake you, boolean generateFullMapNow) {
         initiateProperties(board, you);
 
+        // Flip all lists, so that we use the coordinates according to the battlesnake layout.
+        // This way, we can make the right movements.
+        flipAllLists();
+
         if (generateFullMapNow) generate();
     }
 
     private void initiateProperties(Board board, Battlesnake you) {
         snakeHeads = new ArrayList<>();
         snakeBodies = new ArrayList<>();
+        youBody = new ArrayList<>();
         snakeTails = new ArrayList<>();
         foods = new ArrayList<>();
         hazards = new ArrayList<>();
@@ -59,7 +66,11 @@ public class MapBuilder {
 
             // We only need to save the tail
             if (snake.getId().equals(you.getId())) {
+                youHead = body.get(0);
                 youTail = body.get(lastIndex);
+                body.remove(lastIndex);
+                body.remove(0);
+                youBody = body;
                 continue;
             }
 
@@ -90,11 +101,11 @@ public class MapBuilder {
         } else if (snakeBodies.contains(c)) {
             tile.setTileType(TileType.ENEMY_BODY);
             snakeBodies.remove(c);
-        } else if (c.equals(you.getHead())) {
+        } else if (c.equals(youHead)) {
             tile.setTileType(TileType.YOU_HEAD);
         } else if (c.equals(youTail)) {
             tile.setTileType(TileType.YOU_TAIL);
-        } else if (you.getBody().contains(c)) {
+        } else if (youBody.contains(c)) {
             tile.setTileType(TileType.YOU_BODY);
         } else {
             tile.setTileType(TileType.EMPTY);
@@ -115,10 +126,10 @@ public class MapBuilder {
      * Create the map based off the Board and "you" Battlesnake object
      */
     public void buildMap() {
-        for(int j = 0; j < board.getHeight(); j++) {
+        for(int y = 0; y < board.getHeight(); y++) {
             ArrayList<BoardTile> mapRow = new ArrayList<>();
-            for(int i = 0; i < board.getWidth(); i++) {
-                Coordinate coordinate = new Coordinate(i, j);
+            for(int x = 0; x < board.getWidth(); x++) {
+                Coordinate coordinate = new Coordinate(x, y);
                 BoardTile tile = new BoardTile(coordinate);
                 mapRow.add(switchTile(tile));
             }
@@ -137,7 +148,7 @@ public class MapBuilder {
         snakeBodies.forEach(c -> assignArea(c, TileType.ENEMY_BODY_NEIGHBOR));
         snakeTails.forEach(c -> assignArea(c, TileType.ENEMY_TAIL_NEIGHBOR));
 
-        you.getBody().forEach(c -> assignArea(c, TileType.YOU_BODY_NEIGHBOR));
+        youBody.forEach(c -> assignArea(c, TileType.YOU_BODY_NEIGHBOR));
         assignArea(youTail, TileType.YOU_TAIL_NEIGHBOR);
 
         foods.forEach(c -> assignArea(c, TileType.FOOD_NEIGHBOR));
@@ -162,5 +173,18 @@ public class MapBuilder {
             sb.append(" ]\n");
         }
         System.out.println(sb.toString());
+    }
+
+    private void flipAllLists() {
+        int maxY = board.getHeight();
+
+        this.snakeHeads.forEach(c -> c.flipY(maxY));
+        this.snakeBodies.forEach(c -> c.flipY(maxY));
+        this.snakeTails.forEach(c -> c.flipY(maxY));
+        this.youHead.flipY(maxY);
+        this.youBody.forEach(c -> c.flipY(maxY));
+        this.youTail.flipY(maxY);
+        this.foods.forEach(c -> c.flipY(maxY));
+        this.hazards.forEach(c -> c.flipY(maxY));
     }
 }
