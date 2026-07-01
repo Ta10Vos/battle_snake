@@ -19,8 +19,8 @@ public class MoveResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response move(MoveRequest request) {
-        MapBuilder builder = new MapBuilder(request.board, request.you, true);
         System.out.println("MOVE REQUEST: " + request.toString());
+        MapBuilder builder = new MapBuilder(request.board, request.you, true);
 
         BoardMap map = builder.getMap();
         AStarPathFinder pathFinder = new AStarPathFinder(map);
