@@ -6,7 +6,9 @@ import nl.hu.bep.battlesnake.map.MapBuilder;
 import nl.hu.bep.battlesnake.model.BoardMap;
 
 public class ResourceManager {
+    private final static boolean debug = false;
     public static void mapDebug(BoardMap map, MoveResult result) {
+        if (!ResourceManager.debug) return;
         System.out.println("SUCCESSFULLY CREATED A PATH:");
         System.out.println("TOTAL COST:" + result.getPathCost());
         System.out.println("PATH:\n---");
