@@ -26,7 +26,7 @@ public class BoardMap {
      */
     public void addRow(ArrayList<BoardTile> row) {
         // Y-index is mirrored. Push it in index 0.
-        this.map2D.add(0, row);
+        this.map2D.add(row);
     }
 
     public void lockEditing() {
