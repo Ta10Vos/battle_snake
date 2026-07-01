@@ -33,6 +33,7 @@ public class MoveResource {
 
         result.calculateMoveType();
         String move = result.getMoveType().toString();
+        System.out.println("\nMOVING " + move + "!!!!\n");
         return Response
                 .ok()
                 .entity(new MoveResponse(move, "Moving " + move))
