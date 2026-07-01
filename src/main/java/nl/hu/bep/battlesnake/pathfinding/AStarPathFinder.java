@@ -23,8 +23,9 @@ public class AStarPathFinder {
         nodes = new Node[maxY + 1][maxX + 1];
         // Populate the nodes list
         for (int y = 0; y <= maxY; y++) {
+            int reversedY = maxY - y;
             for (int x = 0; x <= maxX; x++) {
-                nodes[y][x] = new Node(new Coordinate(x, y));
+                nodes[reversedY][x] = new Node(new Coordinate(x, reversedY));
             }
         }
     }
