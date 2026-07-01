@@ -65,11 +65,12 @@ public class Node extends Coordinate implements Comparable<Node> {
 
     @Override
     public String toString() {
-        return "Point{" +
-                "previous=" + previous +
-                ", gCost=" + gCost +
+        return "Node{" +
+                "y=" + y +
+                ", x=" + x +
                 ", hCost=" + hCost +
-                ", fCost=" + getFCost() +
+                ", gCost=" + gCost +
+                ", previous=" + previous +
                 '}';
     }
 }
