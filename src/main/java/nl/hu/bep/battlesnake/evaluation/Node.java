@@ -40,6 +40,10 @@ public class Node extends Coordinate implements Comparable<Node> {
         hCost = Calculator.manhattanDistance(this.x, this.y, endGoal.x, endGoal.y);
     }
 
+    public void setHCost(int hCost) {
+        this.hCost = hCost;
+    }
+
     public Node getOffset(int offsetX, int offsetY) {
         return new Node(x + offsetX, y + offsetY, this);
     }
@@ -70,7 +74,7 @@ public class Node extends Coordinate implements Comparable<Node> {
                 ", x=" + x +
                 ", hCost=" + hCost +
                 ", gCost=" + gCost +
-                ", previous=" + previous +
+                ", previous=\n" + previous +
                 '}';
     }
 }
