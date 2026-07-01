@@ -82,16 +82,16 @@ public class AStarPathFinder {
                 if (closedSet.contains(neighbor)) continue;
                 // Get the cost for moving to the neighboring Node
                 int moveCost = current.getGCost() + costMap.get(neighbor.y).get(neighbor.x);
+                boolean inOpenSet = openSet.contains(neighbor);
+
                 // If moving to the neighbor is cheap enough or if we haven't explored the neighbor yet
-                if (moveCost < neighbor.getGCost() || !openSet.contains(neighbor)) {
+                if (!inOpenSet || moveCost < neighbor.getGCost())  {
+                    if (inOpenSet) openSet.remove(neighbor);
                     // Set neighbor variables
                     neighbor.setGCost(moveCost);
                     neighbor.setHCost(end);
                     neighbor.previous = current;
-
-                    if (!openSet.contains(neighbor)) {
-                        openSet.add(neighbor);
-                    }
+                    openSet.add(neighbor);
                 }
             }
 
