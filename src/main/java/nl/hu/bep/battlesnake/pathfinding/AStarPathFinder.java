@@ -21,12 +21,15 @@ public class AStarPathFinder {
         this.maxX = costMap.get(0).size() - 1;
         this.maxY = costMap.size() - 1;
         nodes = new Node[maxY + 1][maxX + 1];
+
+        System.out.println("Generated Node map");
         // Populate the nodes list
         for (int y = 0; y <= maxY; y++) {
             int reversedY = maxY - y;
             for (int x = 0; x <= maxX; x++) {
                 nodes[reversedY][x] = new Node(new Coordinate(x, reversedY));
             }
+            System.out.println(Arrays.toString(nodes[reversedY]));
         }
     }
 

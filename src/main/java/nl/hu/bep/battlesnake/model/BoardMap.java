@@ -66,6 +66,10 @@ public class BoardMap {
             row.forEach(t -> costRow.add(t.getCost()));
             costMap.add(costRow);
         }
+        System.out.println("GENERATED COSTMAP");
+        for (List<BoardTile> row : map2D) {
+            System.out.println(row);
+        }
         return costMap;
     }
 }
