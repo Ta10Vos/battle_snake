@@ -35,8 +35,8 @@ public class BoardMap {
             map2D.set(i, unmodifiableList(row));
         }
         this.map2D = unmodifiableList(this.map2D);
-        maxX = map2D.get(0).size();
-        maxY = map2D.size();
+        maxX = map2D.get(0).size() - 1;
+        maxY = map2D.size() - 1;
     }
 
     public BoardTile getBoardTile(int y, int x) {
