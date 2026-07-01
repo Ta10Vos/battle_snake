@@ -20,6 +20,7 @@ public class MoveResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response move(MoveRequest request) {
         MapBuilder builder = new MapBuilder(request.board, request.you, true);
+        System.out.println("MOVE REQUEST: " + request.toString());
 
         BoardMap map = builder.getMap();
         AStarPathFinder pathFinder = new AStarPathFinder(map);
