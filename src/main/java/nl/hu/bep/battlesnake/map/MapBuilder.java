@@ -118,7 +118,6 @@ public class MapBuilder {
         buildMap();
         generateNeighbours();
         map.lockEditing();
-//        MapBuilder.logMap(map);
         finished = true;
     }
 

@@ -66,10 +66,6 @@ public class BoardMap {
             row.forEach(t -> costRow.add(t.getCost()));
             costMap.add(costRow);
         }
-        System.out.println("GENERATED COSTMAP");
-        for (List<Integer> row : costMap) {
-            System.out.println(row);
-        }
         return costMap;
     }
 }
