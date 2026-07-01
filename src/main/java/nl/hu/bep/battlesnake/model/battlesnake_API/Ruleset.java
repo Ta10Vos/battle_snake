@@ -36,4 +36,13 @@ public class Ruleset {
     public void setSettings(Object settings) {
         this.settings = settings;
     }
+
+    @Override
+    public String toString() {
+        return "Ruleset{" +
+                "name='" + name + '\'' +
+                ", version='" + version + '\'' +
+                ", settings=" + settings +
+                '}';
+    }
 }

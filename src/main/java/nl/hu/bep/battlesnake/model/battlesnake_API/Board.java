@@ -43,4 +43,15 @@ public class Board {
     public List<Battlesnake> getSnakes() {
         return snakes;
     }
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                "height=" + height +
+                ", width=" + width +
+                ", food=" + food +
+                ", hazards=" + hazards +
+                ", snakes=" + snakes +
+                '}';
+    }
 }

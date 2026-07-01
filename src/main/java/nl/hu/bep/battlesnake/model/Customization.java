@@ -42,4 +42,13 @@ public class Customization {
     public void setTail(String tail) {
         this.tail = tail;
     }
+
+    @Override
+    public String toString() {
+        return "Customization{" +
+                "color='" + color + '\'' +
+                ", head='" + head + '\'' +
+                ", tail='" + tail + '\'' +
+                '}';
+    }
 }

@@ -9,4 +9,14 @@ public abstract class BaseGameRequest {
     public int turn;
     public Board board;
     public Battlesnake you;
+
+    @Override
+    public String toString() {
+        return "BaseGameRequest{" +
+                "game=" + game +
+                ", turn=" + turn +
+                ", board=" + board +
+                ", you=" + you +
+                '}';
+    }
 }

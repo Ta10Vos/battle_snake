@@ -60,4 +60,15 @@ public class Game {
     public void setSource(String source) {
         this.source = source;
     }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id='" + id + '\'' +
+                ", ruleset=" + ruleset +
+                ", map='" + map + '\'' +
+                ", timeout=" + timeout +
+                ", source='" + source + '\'' +
+                '}';
+    }
 }
