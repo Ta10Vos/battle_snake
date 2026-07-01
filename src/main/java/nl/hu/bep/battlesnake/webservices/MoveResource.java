@@ -34,7 +34,7 @@ public class MoveResource {
         String move = result.getMoveType().toString();
         return Response
                 .ok()
-                .entity(new MoveResponse(move, ""))
+                .entity(new MoveResponse(move, "Moving " + move))
                 .build();
     }
 }
