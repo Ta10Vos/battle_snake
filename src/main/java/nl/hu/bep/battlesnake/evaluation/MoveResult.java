@@ -25,7 +25,10 @@ public class MoveResult {
 
     public void addToPath(Node node) {
         path.add(0, node);
-        pathCost += node.getGCost();
+    }
+
+    public void setPathCost(Integer pathCost) {
+        this.pathCost = pathCost;
     }
 
     public int getPathCost() {

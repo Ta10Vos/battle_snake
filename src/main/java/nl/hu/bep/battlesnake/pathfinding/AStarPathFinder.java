@@ -72,7 +72,7 @@ public class AStarPathFinder {
             if (current == null) {// If there's no more explorable Points
                 return null;
             } else if (current.equals(end)) {// If we have reached the endGoal
-                return constructPath(current);
+                return constructPath(current, start);
             }
             // Add current Node to the explored nodes
             closedSet.add(current);
@@ -137,13 +137,15 @@ public class AStarPathFinder {
         return neighbors;
     }
 
-    private MoveResult constructPath(Node current) {
+    private MoveResult constructPath(Node current, Node start) {
         MoveResult result = new MoveResult();
+        result.setPathCost(current.getGCost());
         // Walk through the points that have each other saved.
         while (current.previous != null) {
             result.addToPath(current);
             current = current.previous;
         }
+        result.addToPath(start);
         return result;
     }
 }
